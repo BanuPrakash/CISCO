@@ -16,6 +16,6 @@
     <!-- GET request to servlet whose URL pattern is /products-->
     <a href="products">Get all Products</a> <br />
     <!-- redirect to HTML page -->
-    <a href="productForm.html">Add a new Product</a>
+    <a href="productForm.jsp">Add a new Product</a>
 </body>
 </html>

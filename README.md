@@ -351,6 +351,12 @@ http://localhost:8080/lisp.jsp?JSESSIONID=2lwqb1
 
 http://localhost:8080/login.jsp
 
+Filter: are used as interceptor pattern
+
+* SecurityFilter
+* EncryptionFilter
+* Encoding/Decoding
+...
 
 
 
