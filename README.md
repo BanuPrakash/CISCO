@@ -332,7 +332,13 @@ src/main/webapp folder ==> place where we add static resources like HTML / CSS /
 
 mvn jetty:run
 
+mvn package
 
+Servlet is good for Dynamic Content.
+
+Use Templates for View rendering: JSP, Thymeleaf ,..
+
+JSP ==> combination of Static + dynamic content
 
 
 

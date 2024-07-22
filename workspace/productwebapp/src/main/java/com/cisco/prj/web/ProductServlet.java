@@ -19,21 +19,27 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html"); // MIME
-        PrintWriter out = resp.getWriter(); // Character Stream to the Browser
-        out.println("<html><body>");
-        out.println("<table border=\'1\'>");
-        out.println("<tr><th>ID</th><th>Name</th><th>Price</th></tr>");
+
         ProductDao productDao = new ProductDaoJdbcImpl();
         List<Product> products = productDao.getProducts();
-        for(Product p : products) {
-            out.println("<tr>");
-                out.println("<td>" + p.getId() + "</td>");
-                out.println("<td>" + p.getName() + "</td>");
-                out.println("<td>" + p.getPrice() + "</td>");
-            out.println("</tr>");
-        }
-        out.println("</table></body></html>");
+        req.setAttribute("products", products);
+        req.getRequestDispatcher("list.jsp").forward(req, resp);
+
+       //        resp.setContentType("text/html"); // MIME
+//        PrintWriter out = resp.getWriter(); // Character Stream to the Browser
+//        out.println("<html><body>");
+//        out.println("<table border=\'1\'>");
+//        out.println("<tr><th>ID</th><th>Name</th><th>Price</th></tr>");
+//        ProductDao productDao = new ProductDaoJdbcImpl();
+//        List<Product> products = productDao.getProducts();
+//        for(Product p : products) {
+//            out.println("<tr>");
+//                out.println("<td>" + p.getId() + "</td>");
+//                out.println("<td>" + p.getName() + "</td>");
+//                out.println("<td>" + p.getPrice() + "</td>");
+//            out.println("</tr>");
+//        }
+//        out.println("</table></body></html>");
     }
 
     @Override
