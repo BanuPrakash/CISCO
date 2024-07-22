@@ -277,4 +277,62 @@ Implementation classes are provided by the database vendors [Oracle / MySQL / H2
 
 Entity ==> representation of business data, long lived , can survive system crush ==> will have association with persistent store like relational database / file system / NoSQL
 
+DAO [Data Access Object] ==> CRUD operations CREATE READ UPDATE AND DELETE
+
+Client, Exception Handling
+
+e.getMessage() and e.printStackTrace()
+
+Connection, DriverManger.getConnection(), Statement, PreparedStatement [if SQL takes IN Parameter]
+CallableStatement --> to invoke StoredProcedures / Functions of Database [INOUT parameter]
+
+==========================
+
+Web Application Development:
+1) Servlet Containers: jetty / tomcat / netty ...
+Eclipse Jetty is a Java web server and Java Servlet container.
+
+2) we need servlet apis dependency
+
+added into pom.xml
+<packaging>war</packaging>
+
+Web Archive similar to JAR but with a specific type of folder structure which Servlet engines can understand
+
+maven-compiler-plugin ==> uses Maven to compile instead of IDE specific
+
+mvn compile
+
+War Plugin:
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>3.4.0</version>
+        <configuration>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+</plugin>
+
+```
+WAR format
+    application
+        |
+        WEB-INF
+            |
+            classes
+                |
+                ProductServlet.class
+                LoginServlet.class
+                RegisterServlet.class
+            web.xml
+
+```
+
+
+
+
+
+
+
+
 
