@@ -1,6 +1,5 @@
 # Advance Java
 
-
 Banuprakash C
 
 Full Stack Architect, Corporate Trainer
@@ -69,6 +68,172 @@ mysql> exit
 
 =====================
 
+Advance Java: TOC
+```
+1) Day 1:
+Servlet Technologies to build web based application using MySQL as database
+* Servlet
+* JSP
+* Filter
+* Listener
+* Session Tracking
+* Servlet Context
 
+2) Day 2, 3, 4 --> Spring and Spring Boot with JPA using Hibernate to build RESTful Web Services
+3) Day 5 --> Security to your RESTful WS & Introduction to MicroServices
+
+```
+
+Day 1
+
+Rendering ==> data to presentation
+
+```
+* Server Side Rendering (SSR)
+    Advantages:
+    1) Thin Client
+    2) Good for SEO 
+    Disadvantages:
+    1) Can't have heterogeous clients
+    2) Tight coupling to type of client
+    3) Heavy Network traffic / payload
+* Client Side Rendering (CSR)
+    Advantages:
+    1) heterogeous clients like Web / Mobile / Desktop / Tv /,...
+    2) light weight payload
+    3) decoupling of client and server technologies
+    Disadvantage:
+    1) not SEO 
+    2) Heavy client [ renderers are required in client machine]
+```
+
+Servlet is a technology to build web applications using Java techonologies
+
+Java techonologies --> we run bytecode on JVM [ part of JRE ]
+bytecode can be generated using various programming languages like Java / Kotlin / Groovy
+
+Servlet Technology uses Servlet engine / Web Container / Servlet Container to manage life cycle of objects, Dependency Injection
+
+Request: encapsulates all the data comming from client: Form Data + Browser + OS
+
+Response: is used to write data back to client [ contains client IP and PORT number ]
+
+
+=========
+
+Multi Threaded application:
+Process --> Program in execution --> Unit of Work --> Thread
+If an application is having many units of work concurrently executing --> Multi threaded
+
+Word Application:
+1 Thread for User interaction [ typing]
+1 Thread for Grammer Check
+1 Thread for Spell Check
+1 Thread for Auto Saving
+
+===============
+
+HTTP protocol
+Method of request can be GET / POST / PUT / PATCH / DELETE
+
+GET: address bar and hyperlink are by default GET request
+
+POST: generally FORM data, by default this is also GET request
+
+
+Servlets are classes which are inherited from HttpServlet
+
+```
+GET / POST / PUT
+http://localhost:8080/login
+
+public class LoginServlet extends HttpServlet {
+
+    public void doGet(HttpServletRequest req, HttpServletResponse res) {
+
+    }
+
+    public void doPost(HttpServletRequest req, HttpServletResponse res) {
+
+    }
+
+     public void doDelete(HttpServletRequest req, HttpServletResponse res) {
+
+    }
+
+     public void doPut(HttpServletRequest req, HttpServletResponse res) {
+
+    }
+
+}
+
+new LoginServlet(); // not do this , rather Servlet engine creates this object 
+
+```
+
+Deployment Descriptor --> passing Metadata to Servlet engine
+web.xml
+
+```
+<servlet>
+    <servlet-name> First </servlet-name>
+    <servlet-class> pkg.LoginServlet </servlet-class>
+</servlet>
+<servlet>
+    <servlet-name> Second </servlet-name>
+    <servlet-class> pkg.RegisterServlet </servlet-class>
+</servlet>
+
+<servlet-mapping>
+     <servlet-name> First </servlet-name>
+     <url-pattern>/login</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+     <servlet-name> Second </servlet-name>
+     <url-pattern>/register</url-pattern>
+</servlet-mapping>
+```
+
+We can also use Annotations instead of XML [ we are going to use]
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+
+===========
+
+Annotation: --> Metadata [ data about data]
+* Who is going to use it?
+1) Compiler
+2) ClassLoader
+3) Runtime
+* Where can I use it?
+1) Class level
+2) method level
+3) field level
+
+Example:
+```
+public class Base {
+    public void doTask() {}
+}
+
+public class Derived extends Base {
+    @Override
+    public void doTask() {}
+}
+
+@Override --> used by Compiler and  method level
+When Compiler compiles Derived.java this annoation tells compiler to  check base class signature, if any mismatch don't compiler
+Derived.java
+
+
+@SettopBox(name="hathway")
+public class ChannelList {
+
+}
+
+CustomClassLoader --> NetworkClassLoader
+SettopBox --> annoation used by class loader
+```
 
 
