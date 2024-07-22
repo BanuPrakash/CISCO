@@ -328,6 +328,8 @@ WAR format
 
 ```
 
+src/main/webapp folder ==> place where we add static resources like HTML / CSS / JS for the project
+
 
 
 
