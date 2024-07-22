@@ -52,9 +52,10 @@ public class ProductServlet extends HttpServlet {
         ProductDao productDao = new ProductDaoJdbcImpl();
         try {
             productDao.addProduct(p);
-            resp.sendRedirect("index.html");
+            resp.sendRedirect("index.jsp?msg=Product added!!!");
         } catch (PersistenceException e) {
             e.printStackTrace();
+            resp.sendRedirect("index.jsp?msg=" + e.getMessage());
         }
     }
 }

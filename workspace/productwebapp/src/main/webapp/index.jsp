@@ -6,6 +6,9 @@
 </head>
 <body>
     <h1>Product Application</h1>
+    <div>
+        ${param.msg}
+    </div>
     <!-- GET request to servlet whose URL pattern is /products-->
     <a href="products">Get all Products</a> <br />
     <!-- redirect to HTML page -->
