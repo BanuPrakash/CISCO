@@ -20,17 +20,17 @@ public class ProductDaoJdbcImpl implements  ProductDao{
         }
     }
     @Override
-    public void addProduct(Product p) {
+    public void addProduct(Product p) throws PersistenceException{
         Connection con = null;
-        String SQL = "INSERT INTO products (id, name, price) VALUES(0, ?, ?)";
         try {
+            String SQL = "INSERT INTO products (id, name, price) VALUES(0, ?, ?)";
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, p.getName());
             ps.setDouble(2, p.getPrice());
             ps.executeUpdate();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new PersistenceException("unable to add product", ex);
         }
     }
 
