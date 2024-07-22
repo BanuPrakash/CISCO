@@ -5,7 +5,11 @@
     <title>Product Application</title>
 </head>
 <body>
-    <h1>Product Application</h1>
+
+    <h1>Product Application, Welcome ${user}</h1>
+    <div>
+        <a href="logout">Logout</a>
+    </div>
     <div>
         ${param.msg}
     </div>

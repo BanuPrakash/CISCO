@@ -12,7 +12,10 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Product list JSP</h1>
+    <h1>Product list JSP,  Welcome ${user}</h1>
+    <div>
+        <a href="logout">Logout</a>
+    </div>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -23,7 +26,7 @@
             <tr>
                 <td>${product.id}</td>
                 <td>${product.name}</td>
-                <td>${product.name}</td>
+                <td>${product.price}</td>
             </tr>
         </c:forEach>
     </table>

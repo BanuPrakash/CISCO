@@ -341,6 +341,18 @@ Use Templates for View rendering: JSP, Thymeleaf ,..
 JSP ==> combination of Static + dynamic content
 
 
+Http protocol is a stateless protocol. No conversational state of client
+
+Session Tracking: ability to keep track of conversational state of client
+
+JSESSIONID can be sent to client using Cookie <<default>> or by using URL-Rewriting
+
+http://localhost:8080/lisp.jsp?JSESSIONID=2lwqb1
+
+http://localhost:8080/login.jsp
+
+
+
 
 
 
