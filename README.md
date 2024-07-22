@@ -253,3 +253,28 @@ Query OK, 1 row affected (0.01 sec)
 
 mysql> select * from products;
 
+=====
+
+JDBC Java Database Connectivity ==> Integration Library
+
+Maven or Gradle are Java build tools
+* manage dependecies
+dependencies are in the form of JAR files residing in repositories
+we can download one by one and configure in the application [40+ jar]
+or
+allow Maven / Gradle to do this 
+
+* run goals like clean / Compile/ build / test
+
+Local Repository:
+/Users/<<username>>/.m2/repositories/....
+
+
+Java provides JDBC ==> collection on interfaces
+Implementation classes are provided by the database vendors [Oracle / MySQL / H2 / Derby / Postgres]
+
+=============
+
+Entity ==> representation of business data, long lived , can survive system crush ==> will have association with persistent store like relational database / file system / NoSQL
+
+
