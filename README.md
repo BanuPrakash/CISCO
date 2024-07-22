@@ -236,4 +236,20 @@ CustomClassLoader --> NetworkClassLoader
 SettopBox --> annoation used by class loader
 ```
 
+% docker exec -it local-mysql bash
+# mysql -u root -p
+
+mysql> create database CISCO_JAVA;
+
+mysql> use CISCO_JAVA
+
+mysql> create table products (id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), price double);
+
+mysql> insert into products values(0, 'iPhone 15', 89000.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values(0, 'Samsung OLED', 210000.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from products;
 
