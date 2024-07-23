@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -24,7 +25,7 @@ public class Order {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="order_date")
-    private LocalDate orderDate = LocalDate.now(); // system date
+    private Date orderDate = new Date(); // system date
 
     @ManyToOne
     @JoinColumn(name="customer_fk") // FK

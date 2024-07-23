@@ -746,8 +746,18 @@ update ==> Top to Bottom Approach and hybrid
 
 ================
 
+1) 
+@JoinColumn with @ManyToOne will introduce FK in owning table
+  @ManyToOne
+  @JoinColumn(name="customer_fk") // FK
+  private Customer customer; // order is by a given Customer
 
 
+2)
+@JoinColumn with @OnetoMany will introduce FK in child table
+ @OneToMany
+ @JoinColumn(name="order_fk")
+ private List<LineItem> items = new ArrayList<>();
 
 
 
