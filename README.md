@@ -704,8 +704,52 @@ ORM Frameworks:
 6) EclipseLink --> Eclipse
 .....
 
+ApplicationContext: environment where beans are managed. [ above mentioned 7 annotations]
+
 JPA Specification interface for ORM
 
+PersistenceContext: environment where entities are managed [@Entity]
+EntityManager is an interface which is used to manage PersistenceContext
+DataSource: pool of database connection
+EntityManagerFactory is a factory class to create PersistenceContext
+
+JpaVendor
+[Hibernate / KODO / OpenJPA/ TopLink]
+
+Spring Boot provides Spring Data JPA.
+
+Spring Data JPA: simplifies using JPA.
+out of the box "Spring Data JPA" creates DataSource, EntityManagerFactory, PersitenceContext...
+
+=====
+
+New Spring Boot project with following dependencies:
+1) lombok
+2) MySQL
+3) Spring Data JPA
+
+https://docs.spring.io/spring-boot/appendix/application-properties/index.html
+
+spring.jpa.hibernate.ddl-auto=update
+Data Defintion Language : create , drop , alter table
+
+update--> if for a class mapped to database table exists --> use it
+if not exist --> create table
+if required alter the table
+
+create --> drop tables on termination of application, create tables when application starts [ used only in test environment]
+
+validate --> map classes to existing tables. If matches use it, if doesn't match throw error. no changes to existing tables
+
+validate ==> Bottom to Top Appraoch [write classes to match tables]
+update ==> Top to Bottom Approach and hybrid
+
+================
 
 
+@Id ==> PRIMARY KEY
+@GeneratedValue(strategy = GenerationType.IDENTITY) ==> AUTO_INCREMENT
 
+   @Column(name="qty")
+    private int quantity; ==> alter table add column qty ...
+    
