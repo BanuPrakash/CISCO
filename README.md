@@ -544,5 +544,30 @@ Scope of Bean:
 Advantage of using @Repository instead of @Component for DAO layer code.
 https://github.com/spring-projects/spring-framework/blob/main/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml
 
-Resume @ 10:55
 
+Spring boot:
+Spring Boot is a framework on top of Spring Framework.
+
+Spring Boot 2.x is built on top of Spring Framework 5.x
+Spring Boot 3.x uses Spring Framework 6.x
+
+Spring Boot is highly opiniated framework, lots of configurations are done out of the box.
+For Example if we are building web based application, Embedded Tomcat Servlet container / web Server is configured out of box.
+
+If we are using JDBC, database Connection pool is created out of the box
+
+ DriverManager.getConnection(URL, USER, PASSWORD); --> opens a single connection
+
+ latency involved in opening and closing connection is solved by using connection pool.
+
+ many more ...
+
+ ==========================
+
+
+@SpringBootApplication is 3 in 1:
+1) @Configuration
+2) @ComponentScan ==> by default adds package where this class resides and sub-packages to scan
+2) @EnableAutoConfiguration ==> used to create opinated beans based on Context [ Connection pool if DB is used, Tomcat Embedded Server if web application is built]
+
+SpringApplication.run(DemoApplication.class, args); is same as "new AnnotationConfigApplicationContext();"

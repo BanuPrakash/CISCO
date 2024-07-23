@@ -36,6 +36,14 @@ public class ProductDaoJdbcImpl implements  ProductDao{
                 throw new PersistenceException("Unable to add Product!!", ex);
             }
 
+        } finally {
+             if(con != null) {
+                 try {
+                     con.close();
+                 } catch (SQLException e) {
+                     throw new RuntimeException(e);
+                 }
+             }
         }
     }
 
