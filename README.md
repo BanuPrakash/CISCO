@@ -481,6 +481,7 @@ Example:
  }
 
  @Repository
+ @Scope("prototype")
  public class EmployeeDaoJdbcImpl implements EmployeeDao {
         public void addEmployee() {
             // logic to insert into RDBMS
@@ -497,6 +498,7 @@ Example:
         }
     }
 
+
 ApplicationContext ctx = new AnnotationConfigApplicationContext();
 ctx.scan("com.cisco.prj");
 ctx.refresh();
@@ -508,3 +510,34 @@ ser.insert();
 Spring Boot depends on libraries like ByteBuddy / JavaAssist and CGLib for wiring and creating proxies
 
 Byte Buddy is a code generation and manipulation library for creating and modifying Java classes.
+
+Scope of Bean:
+1) Singleton <<default>>
+2) Prototype
+
+
+
+
+
+@Service
+ public class AppService {
+        @Autowired
+        private EmployeeDao empDao;
+       
+        public void insert() {
+            this.empDao.addEmployee();
+        }
+    }
+
+@Service
+ public class AdminService {
+        @Autowired
+        private EmployeeDao empDao;
+       
+        public void insert() {
+            this.empDao.addEmployee();
+        }
+    }
+
+=================
+
