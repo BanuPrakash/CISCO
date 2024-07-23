@@ -30,7 +30,12 @@ public class ProductDaoJdbcImpl implements  ProductDao{
             ps.setDouble(2, p.getPrice());
             ps.executeUpdate();
         } catch (SQLException ex) {
-            throw new PersistenceException("unable to add product", ex);
+            if(ex.getErrorCode() ==1062) {
+                throw new PersistenceException("Product with given id: " + p.getId() + " already exists!!", ex);
+            } else if(ex.getErrorCode() == 1054) {
+                throw new PersistenceException("Unable to add Product!!", ex);
+            }
+
         }
     }
 

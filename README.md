@@ -541,3 +541,8 @@ Scope of Bean:
 
 =================
 
+Advantage of using @Repository instead of @Component for DAO layer code.
+https://github.com/spring-projects/spring-framework/blob/main/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml
+
+Resume @ 10:55
+
