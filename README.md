@@ -630,6 +630,40 @@ spring.profiles.active=dev
 OR
 
 Main class -> Right click --> More Run/Debug --> Modify Configurations ==> Active Profile [ dev or prod]
+
+profile resolving:
+1) Command Line Argument / Configuration 
+2) Environment Variable [ System Env]
+3) application.properties
+
 ```
 
+Solution 4:
+@ConditionalOnMissingBean
 
+```
+@Repository
+public class EmployeeDaoJdbcImpl implements  EmployeeDao{
+
+@Repository
+@ConditionalOnMissingBean(EmployeeDaoJdbcImpl.class)
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+
+```
+
+Factory Method: are methods which create  and return an object.
+Why? 
+* when we use 3rd party classes in project which doesn't have any of the above mentioned 7 annotations
+
+https://www.mchange.com/projects/c3p0/
+
+DriverManager.getConnection() --> create a single Connection
+DataSource --> Pool of database connection
+https://www.mchange.com/projects/c3p0/
+```
+<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.10.1</version>
+</dependency>
+```
