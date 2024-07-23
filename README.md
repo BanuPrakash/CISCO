@@ -571,3 +571,65 @@ If we are using JDBC, database Connection pool is created out of the box
 2) @EnableAutoConfiguration ==> used to create opinated beans based on Context [ Connection pool if DB is used, Tomcat Embedded Server if web application is built]
 
 SpringApplication.run(DemoApplication.class, args); is same as "new AnnotationConfigApplicationContext();"
+
+Problem:
+
+Field employeeDao in com.cisco.demo.service.AppService required a single bean, but 2 were found:
+	- employeeDaoJdbcImpl
+	- employeeDaoMongoImpl
+
+
+Solution 1:
+using @Qualifier
+
+```
+
+@Service
+public class AppService {
+    @Autowired
+    @Qualifier("employeeDaoJdbcImpl")
+    private EmployeeDao employeeDao; // dependency , loosely coupled
+
+```
+
+Solution 2:
+using @Primary
+
+```
+@Repository
+@Primary
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+
+@Repository
+public class EmployeeDaoJdbcImpl implements  EmployeeDao{
+
+
+@Service
+public class AppService {
+    @Autowired
+    private EmployeeDao employeeDao;
+
+```
+
+Solution 3:
+using @Profile
+
+```
+@Repository
+@Profile("prod")
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+
+@Repository
+@Profile("dev")
+public class EmployeeDaoJdbcImpl implements  EmployeeDao{
+
+resources>
+application.properties
+spring.profiles.active=dev
+
+OR
+
+Main class -> Right click --> More Run/Debug --> Modify Configurations ==> Active Profile [ dev or prod]
+```
+
+
