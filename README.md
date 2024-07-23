@@ -747,9 +747,5 @@ update ==> Top to Bottom Approach and hybrid
 ================
 
 
-@Id ==> PRIMARY KEY
-@GeneratedValue(strategy = GenerationType.IDENTITY) ==> AUTO_INCREMENT
 
-   @Column(name="qty")
-    private int quantity; ==> alter table add column qty ...
-    
+
