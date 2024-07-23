@@ -18,7 +18,7 @@ public class OrderService {
 
     @Autowired
     private CustomerDao customerDao;
-    
+
 //    // Spring Data JPA generates classes for the JpaRepository interface
 //    // which is wired
 //    private final ProductDao productDao; // Constructor DI instead of @Autowired
@@ -42,5 +42,9 @@ public class OrderService {
 
     public List<Customer> getCustomers() {
         return customerDao.findAll();
+    }
+
+    public long getCustomersCount() {
+        return customerDao.count();
     }
 }
