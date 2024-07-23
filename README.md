@@ -358,10 +358,153 @@ Filter: are used as interceptor pattern
 * Encoding/Decoding
 ...
 
+=========
+
+Day 2
+
+Recap:
+JDBC --> Java Database connectivity - Integration Library to connect Java <--> RDBMS
+Web Application Development
+Servlet Engine / Servlet Container / Web Container
+Servlet, deployment descriptor [ web.xml or Annotation]
+JSP --> internally its a servlet but allows us to write static + dynamic content
+Filter --> Interceptor Pattern [ concern which is not part of main logic but can be used along with main logic like Security, Logging, Encryption, Profile]
+HttpSession: to track Conversational State of client
+
+SOLID design Principles
+S --> Single Responsibility
+
+MVC Architectural Pattern
+M --> Model [ business data + business logic ] --> Entity, service , DAO
+V --> View [ presenation] --> JSP pages
+C --> Controller --> Flow of your application --> Servlet
 
 
 
+Spring Framework:
+Lightweight Container which supports dependency Injection using Inversion Of Control to build enterprise applications. 
+
+SOLID design Principles
+D --> Dependency Injection
+
+Metadata
+XML / Annotation
+
+Example of Depenedency Injection using XML as metadata:
+```
+    interface EmployeeDao {
+        void addEmployee();
+    }
+
+    public class EmployeeDaoJdbcImpl implements EmployeeDao {
+        public void addEmployee() {
+            // logic to insert into RDBMS
+        }
+    }
+
+      public class EmployeeDaoMongoDbImpl implements EmployeeDao {
+        public void addEmployee() {
+            // logic to insert into MongoDB --> NoSQL
+        }
+    }
+
+    Setter DI
+    public class AppService {
+        private EmployeeDao empDao;
+
+        public void setEmpDao(EmployeeDao dao) {
+            this.empDao = dao;
+        }
+
+        public void insert() {
+            this.empDao.addEmployee();
+        }
+    }
+```
+
+Metadata --> XML --> beans.xml
+```
+    <beans>
+            <bean id="jdbc" class="pkg.EmployeeDaoJdbcImpl" />
+            <bean id="mongo" class="pkg.EmployeeDaoMongoDbImpl" />
+            <bean id="service" class="pkg.AppService">
+                <property name="empDao" ref="mongo" />
+            </bean>
+    </beans>
+```
+To create Spring Container:
+
+ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
+
+AppService ser = ctx.getBean("service", AppService.class);
+ser.insert();
+
+Constructor DI:
+```
+ public class AppService {
+        private EmployeeDao empDao;
+        public AppService(EmployeeDao dao) {
+            this.empDao = dao;
+        }
+        public void insert() {
+            this.empDao.addEmployee();
+        }
+    }
+
+  <beans>
+            <bean id="jdbc" class="pkg.EmployeeDaoJdbcImpl" />
+            <bean id="mongo" class="pkg.EmployeeDaoMongoDbImpl" />
+            <bean id="service" class="pkg.AppService">
+                <constructor index="0" ref="mongo" />
+            </bean>
+    </beans>
+
+```
+
+Annotations as Metadata:
+Spring instantiates if it finds any of the below annotations at class level:
+1) @Component
+2) @Repository
+3) @Service
+4) @Configuration
+5) @Controller
+6) @RestController
+7) @ControllerAdvice
 
 
+Example:
 
 
+```
+ interface EmployeeDao {
+        void addEmployee();
+ }
+
+ @Repository
+ public class EmployeeDaoJdbcImpl implements EmployeeDao {
+        public void addEmployee() {
+            // logic to insert into RDBMS
+        }
+}
+
+@Service
+ public class AppService {
+        @Autowired
+        private EmployeeDao empDao;
+       
+        public void insert() {
+            this.empDao.addEmployee();
+        }
+    }
+
+ApplicationContext ctx = new AnnotationConfigApplicationContext();
+ctx.scan("com.cisco.prj");
+ctx.refresh();
+
+AppService ser = ctx.getBean("appService", AppService.class);
+ser.insert();
+```
+
+Spring Boot depends on libraries like ByteBuddy / JavaAssist and CGLib for wiring and creating proxies
+
+Byte Buddy is a code generation and manipulation library for creating and modifying Java classes.
