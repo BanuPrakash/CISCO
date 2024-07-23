@@ -747,7 +747,8 @@ update ==> Top to Bottom Approach and hybrid
 ================
 
 
-update products set qty = 100 where 1 = 1;
+
+
 
 
 
