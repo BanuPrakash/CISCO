@@ -1,0 +1,16 @@
+### @name="GET ORDERS"
+GET http://localhost:8080/api/orders
+Accept: application/json
+
+### @name="PLACE ORDER"
+POST  http://localhost:8080/api/orders
+Accept: application/json
+Content-Type: application/json
+
+{
+  "customer": {"email": "roger@gmail.com"},
+  "items": [
+    { "product": {"id": 3}, "qty": 2},
+    { "product": {"id": 1}, "qty": 3}
+  ]
+}
