@@ -14,9 +14,18 @@ public class ProductController {
     @Autowired
     OrderService service;
 
+    //GET http://localhost:8080/api/products?low=100&high=5000
+    //GET http://localhost:8080/api/products
+
     @GetMapping
-    public List<Product> getProducts() {
-        return  service.getProducts();
+    public List<Product> getProducts(@RequestParam(name = "low", defaultValue = "0.0") double low,
+                                     @RequestParam(name ="high", defaultValue = "0.0") double high) {
+        if(low == 0.0 && high == 0.0) {
+            return service.getProducts();
+        }
+        else {
+            return service.byRange(low, high);
+        }
     }
 
     @PostMapping

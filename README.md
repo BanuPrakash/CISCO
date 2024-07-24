@@ -1004,7 +1004,9 @@ Status Code:
 To test GET request we can use Browser
 To test POST / PUT / DELETE we need clients like POSTMAN or INTELLIJ IDE or any any other client
 
-http://localhost:8080/api/products
+http://localhost:8080/api/products?low=100&high=5000
+
+
 
 
 
