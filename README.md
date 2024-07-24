@@ -1038,23 +1038,53 @@ ProductController.java
 ```
 
 Handling Exception:
-OrderService.java
- public Product getProductById(int id) throws ResourceNotFoundException{
-
-ProductController.java
- @GetMapping("/{id}")
-    public Product getById(@PathVariable("id") int id) throws ResourceNotFoundException{
-@PutMapping("/{id}")
-    public  Product updateProduct(@PathVariable("id") int id, @RequestBody Product p) throws ResourceNotFoundException{
-   
-
 GlobalExceptionHandler.java
 
 Using @ControllerAdvice Classes
 A controller advice allows you to handle exception thrown from @Controller or @RestController. 
 You can think of them as an annotation driven interceptor.
 
+=======
 
+Adding Validation:
+https://docs.oracle.com/javaee/7/api/javax/validation/constraints/package-summary.html
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @NotBlank(message = "Name is required")
+    private String name;
+    
+    @Min(value = 10, message = "Price entered ${validatedValue} should be more than {value}")
+    private double price;
+
+    @Min(value = 1, message = "Quantity entered ${validatedValue} should be more than {value}")
+    @Column(name="qty")
+    private int quantity; // column will be added in table
+}
+
+@PostMapping
+    @ResponseStatus(HttpStatus.CREATED) // 201
+    public Product addProduct(@RequestBody @Valid Product p) {
+        return service.saveProduct(p);
+    }
+```
+
+
+MethodArgumentNotValidException: 
+
+ [Field error default message [Price entered -210000.0 should be more than 10]] 
+ 
+ [Field error default message [Name is required]] 
+ 
+ [Field error default message [Quanti    should be more than 1]] 
 
 
 
