@@ -34,6 +34,18 @@ public class OrderService {
         items amount is computed
         order total is computed
         order_date is system date
+        XML
+        <order>
+            <customer>
+                <email>anna@gmail.com</email>
+            </customer>
+            <items>
+            <item>
+                <product id="2" />
+                <qty>1</qty>
+             </item>
+            </items>
+        </order>
         JSON
         {
             "customer": {"email": "anna@gmail.com"},

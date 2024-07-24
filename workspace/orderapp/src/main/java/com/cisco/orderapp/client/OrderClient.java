@@ -38,8 +38,8 @@ public class OrderClient implements CommandLineRunner {
 
         List<LineItem> items = new ArrayList<>();
         items.add(LineItem.builder()
-                .product(Product.builder().id(2).build())
-                .qty(1).
+                .product(Product.builder().id(2).build()) // which product is purchased?
+                .qty(1). // how many products
                 build());
 
         items.add(LineItem.builder()

@@ -864,6 +864,145 @@ JP-QL:
         from Order o inner join o.customer c")
     List<ReportDTO> getReport();
 
+========================
+
+Client Side Rendering
+Advantages: Heterogenous clients like Web , Mobile, Tv, Desktop, Hardware....
+
+Building RESTful WS
+
+REpresentational State Transfer [REST]
+
+* Resource is present on server: database / file / printer/ images
+Anything present on server and can be named is a resource
+
+* Representation: state of the resource at a given point of time
+
+* ContentNegotiation: representation of resource is served to the client in various formats like XML / JSON / CSV ...
+How client asks for content is using HTTP Header [MIME]
+Accept: text/xml
+Accept: application/json
+
+Resources are identified using a URL [ uniform URL]
+Resources are generally named as plural nouns
+http://localhost:8080/api/products
+http://localhost:8080/api/customers
+http://localhost:8080/api/orders
+
+HTTP methods --> verbs --> Action
+GET, POST, PUT, DELETE
+
+CREATE --> POST
+READ --> GET
+UPDATE --> PUT / PATCH
+DELETE --> DELETE
+
+
+Examples of Usage:
+1) GET http://localhost:8080/api/products
+
+get all products
+
+2) PathParameter is used to fetch by primary key
+GET http://localhost:8080/api/products/3
+
+get a product whose id is 3
+
+3 --> path parameter / path variable
+
+3) Query Parameter is used to get subset / filtered data
+
+Pagination:
+GET http://localhost:8080/api/products?page=1&size=20
+Products by range:
+GET http://localhost:8080/api/products?low=3000&high=10000
+
+? --> Query Parameter / Request Param
+& --> delimiter between each parameter
+
+4) POST http://localhost:8080/api/products
+payload contains a new product data to be added to products resource
+
+5) DELETE http://localhost:8080/api/products/4
+delete a product whose id is 4
+
+6) PUT http://localhost:8080/api/products/2
+payload contains a new product infomartion to update a products whose id is 2
+
+Http Headers:
+1) Accept --> to ask server to send the data in a particular format
+Accept: application/json
+
+2) content-type: what type of payload client is sending to the server
+Content-type: text/xml
+client is sending xml to server
+
+=========
+```
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+By adding above depenency we get:
+1) Servlet api
+2) Embedded Tomcat Web Server
+3) Spring MVC module
+4) Jackson library
+to convert Java <--> JSON
+alternate libraries available: GSON / Jettison / Moxy ...
+
+
+DispatcherServlet
+
+Controller/RestController
+
+Controller --> SSR
+RestController --> CSR
+
+```
+
+@RestController
+@RequestMapping("api/products")
+public class ProductController {
+    
+    @GetMapping
+    public List<Product> getProducts() {
+        ...
+    }
+
+    @PostMapping
+    public Product addProduct(@RequestBody Product p) {
+        ..
+    }
+}
+
+```
+
+ContentNegotiationHandlers
+Jackson for JSON
+JAXB .. for XML
+ResponseBody
+
+Content-type: application/json
+{
+    name: 'AProduct',
+    price: 792.44,
+    quantity: 100
+}
+
+Status Code:
+200 --> OK
+201 --> CREATED
+400 ---> BAD REQUEST
+401 --> not Authorized
+404 --> RESOURCE NOT FOUND
+500 --> INTERNAL SERVER ERROR
+300 series is redirection
+
+
+
 
 
 
