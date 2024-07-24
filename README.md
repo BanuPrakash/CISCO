@@ -1113,4 +1113,27 @@ lombok, web, jpa, mysql, validation
 
 Cannot deserialize value of type `java.util.Date` from String "2024-4-21": not a valid representation (error: Failed to parse Date value '2024-4-21': Cannot parse date "2024-4-21": while it seems to fit format 'yyyy-MM-dd', parsing fails (leniency? null))]
 
+https://databases.biz/data-models/
+
+* Assign employee to Project
+Employee 
+Project
+
+EmployeeProject ==> Similar to Rental
+
+id | employee_fk | project_fk | role        | start_date   | end_date 
+1   sam@cisco       PRJ1        SR.ENG          3-10-2023    null
+
+
+
+* Bug Tracker
+Employee raises a ticket
+Another employee will resolve a ticket
+
+================
+
+Testing
+Caching
+Async request handling
+...
 
