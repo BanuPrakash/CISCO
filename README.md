@@ -1037,10 +1037,22 @@ ProductController.java
    
 ```
 
+Handling Exception:
+OrderService.java
+ public Product getProductById(int id) throws ResourceNotFoundException{
 
+ProductController.java
+ @GetMapping("/{id}")
+    public Product getById(@PathVariable("id") int id) throws ResourceNotFoundException{
+@PutMapping("/{id}")
+    public  Product updateProduct(@PathVariable("id") int id, @RequestBody Product p) throws ResourceNotFoundException{
+   
 
+GlobalExceptionHandler.java
 
-
+Using @ControllerAdvice Classes
+A controller advice allows you to handle exception thrown from @Controller or @RestController. 
+You can think of them as an annotation driven interceptor.
 
 
 

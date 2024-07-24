@@ -1,5 +1,6 @@
 package com.cisco.orderapp.service;
 
+import com.cisco.orderapp.api.ResourceNotFoundException;
 import com.cisco.orderapp.dao.CustomerDao;
 import com.cisco.orderapp.dao.OrderDao;
 import com.cisco.orderapp.dao.ProductDao;
@@ -73,12 +74,12 @@ public class OrderService {
         return orderDao.save(order); // saves order and line_items [CASCADE]
     }
 
-    public Product getProductById(int id) {
+    public Product getProductById(int id) throws ResourceNotFoundException{
         Optional<Product> opt = productDao.findById(id);
         if(opt.isPresent()) {
             return  opt.get();
         }
-        return  null;
+        throw new ResourceNotFoundException("Product with ID : " + id + " doesn't exist!!!");
     }
 
     @Transactional
