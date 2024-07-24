@@ -1086,5 +1086,29 @@ MethodArgumentNotValidException:
  
  [Field error default message [Quanti    should be more than 1]] 
 
+ =============
+
+Rental Application:
+
+customers
+
+email | fname | lname
+
+
+vehicles
+
+reg_no | fuel_type | cost_per_day
+
+
+rentals
+
+id | customer_fk | vehicle_fk | rent_from | rent_to
+
+start.spring.io
+depdenencies
+lombok, web, jpa, mysql, validation
+
+========================
+
 
 
