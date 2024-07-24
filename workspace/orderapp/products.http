@@ -19,3 +19,13 @@ Content-Type: application/json
   "quantity": 50
 }
 
+### @name="Update the Product"
+PUT http://localhost:8080/api/products/5
+Accept: application/json
+Content-Type: application/json
+
+{
+  "price": 649.45
+}
+
+

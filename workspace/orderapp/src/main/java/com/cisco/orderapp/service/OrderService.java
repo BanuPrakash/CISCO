@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 //@RequiredArgsConstructor
@@ -70,6 +71,20 @@ public class OrderService {
         }
         order.setTotal(total);
         return orderDao.save(order); // saves order and line_items [CASCADE]
+    }
+
+    public Product getProductById(int id) {
+        Optional<Product> opt = productDao.findById(id);
+        if(opt.isPresent()) {
+            return  opt.get();
+        }
+        return  null;
+    }
+
+    @Transactional
+    public void updateProduct(int id, Product p) {
+        Product product = productDao.findById(id).get();
+        product.setPrice(p.getPrice()); // DIRTY --> UPDATE SQL
     }
 
     public List<Order> getOrders() {

@@ -1008,7 +1008,34 @@ http://localhost:8080/api/products?low=100&high=5000
 
 
 
+Handling:
+GET http://localhost:8080/api/products/5
+```
+OrderService.java
+public Product getProductById(int id) {
 
+ProductController.java
+@GetMapping("/{id}")
+public Product getById(@PathVariable("id") int id) {
+
+```
+
+PUT http://localhost:8080/api/products/5
+Payload should contain new data
+```
+{
+    "price" : 4211.11
+}
+
+OrderService.java
+  @Transactional
+    public void updateProduct(int id, Product p) {
+
+ProductController.java
+  @PutMapping("/{id}")
+    public  Product updateProduct(@PathVariable("id") int id, @RequestBody Product p) {
+   
+```
 
 
 

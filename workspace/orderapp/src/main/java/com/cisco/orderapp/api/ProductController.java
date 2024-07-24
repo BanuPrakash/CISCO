@@ -16,7 +16,6 @@ public class ProductController {
 
     //GET http://localhost:8080/api/products?low=100&high=5000
     //GET http://localhost:8080/api/products
-
     @GetMapping
     public List<Product> getProducts(@RequestParam(name = "low", defaultValue = "0.0") double low,
                                      @RequestParam(name ="high", defaultValue = "0.0") double high) {
@@ -28,10 +27,23 @@ public class ProductController {
         }
     }
 
+    // GET http://localhost:8080/api/products/3
+    @GetMapping("/{id}")
+    public Product getById(@PathVariable("id") int id) {
+        return service.getProductById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) // 201
     public Product addProduct(@RequestBody Product p) {
         return service.saveProduct(p);
+    }
+
+    // PUT http://localhost:8080/api/products/3
+    @PutMapping("/{id}")
+    public  Product updateProduct(@PathVariable("id") int id, @RequestBody Product p) {
+            service.updateProduct(id, p);
+            return service.getProductById(id);
     }
 
 }
