@@ -1,0 +1,16 @@
+### @name="RENT VEHICLE"
+
+POST http://localhost:8080/api/rentals
+Accept: application/json
+Content-Type: application/json
+
+{
+  "customer": {
+    "email": "veronica@gmail.com"
+  },
+  "vehicle": {
+    "registrationNumber": "KA01AE1321"
+  },
+  "rentFrom": "2024-4-21",
+  "rentTo": "2024-4-24"
+}

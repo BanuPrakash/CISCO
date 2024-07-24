@@ -1,5 +1,6 @@
 package com.cisco.rentalapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,10 +29,12 @@ public class Rental {
     @JoinColumn(name="vehicle_fk")
     private Vehicle vehicle;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     @Column(name = "RENT_FROM")
     private Date rentFrom;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     @Column(name = "RENT_UPTO")
     private Date rentTo;

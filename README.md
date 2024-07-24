@@ -1111,4 +1111,6 @@ lombok, web, jpa, mysql, validation
 ========================
 
 
+Cannot deserialize value of type `java.util.Date` from String "2024-4-21": not a valid representation (error: Failed to parse Date value '2024-4-21': Cannot parse date "2024-4-21": while it seems to fit format 'yyyy-MM-dd', parsing fails (leniency? null))]
+
 
