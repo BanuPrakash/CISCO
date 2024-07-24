@@ -56,6 +56,10 @@ public class OrderService {
         return orderDao.save(order); // saves order and line_items [CASCADE]
     }
 
+    public List<Order> getOrders() {
+        return orderDao.findAll();
+    }
+
 //    // Spring Data JPA generates classes for the JpaRepository interface
 //    // which is wired
 //    private final ProductDao productDao; // Constructor DI instead of @Autowired

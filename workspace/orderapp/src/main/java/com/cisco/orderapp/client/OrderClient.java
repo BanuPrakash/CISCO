@@ -19,7 +19,7 @@ public class OrderClient implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        placeOrder();
+     //   placeOrder();
         getOrders();
     }
 
@@ -43,5 +43,13 @@ public class OrderClient implements CommandLineRunner {
         service.placeOrder(order);
     }
     private void getOrders() {
+        List<Order> orders = service.getOrders();
+        for(Order o : orders) {
+            System.out.println(o.getCustomer().getFirstName() +", " + o.getTotal()); // Anna, 220800.0
+            List<LineItem> items = o.getItems();
+            for(LineItem item : items) {
+                System.out.println(item.getProduct().getName() +", " + item.getQty() + ", " + item.getAmount());
+            }
+        }
     }
 }
