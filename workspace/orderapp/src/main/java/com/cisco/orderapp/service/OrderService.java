@@ -3,6 +3,7 @@ package com.cisco.orderapp.service;
 import com.cisco.orderapp.dao.CustomerDao;
 import com.cisco.orderapp.dao.OrderDao;
 import com.cisco.orderapp.dao.ProductDao;
+import com.cisco.orderapp.dto.ReportDTO;
 import com.cisco.orderapp.entity.Customer;
 import com.cisco.orderapp.entity.LineItem;
 import com.cisco.orderapp.entity.Order;
@@ -26,6 +27,9 @@ public class OrderService {
     @Autowired
     private OrderDao orderDao;
 
+    public List<ReportDTO> getReport() {
+        return orderDao.getReport();
+    }
     /*
         items amount is computed
         order total is computed
@@ -58,6 +62,10 @@ public class OrderService {
 
     public List<Order> getOrders() {
         return orderDao.findAll();
+    }
+
+    public  List<Product> byRange(double low, double high) {
+        return productDao.findByPriceBetween(low, high);
     }
 
 //    // Spring Data JPA generates classes for the JpaRepository interface

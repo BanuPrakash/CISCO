@@ -858,8 +858,11 @@ void transferFunds(Account fromAcc, Account toAcc, double amt) {
     send Email
 }
 ```
+JP-QL:
 
-
+  @Query("select new com.cisco.orderapp.dto.ReportDTO(c.email, c.firstName, c.lastName, o.orderDate, o.total) 
+        from Order o inner join o.customer c")
+    List<ReportDTO> getReport();
 
 
 

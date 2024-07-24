@@ -1,5 +1,6 @@
 package com.cisco.orderapp.client;
 
+import com.cisco.orderapp.dto.ReportDTO;
 import com.cisco.orderapp.entity.Customer;
 import com.cisco.orderapp.entity.LineItem;
 import com.cisco.orderapp.entity.Order;
@@ -20,7 +21,14 @@ public class OrderClient implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
      //   placeOrder();
-        getOrders();
+      //  getOrders();
+        getReport();
+    }
+
+    private void getReport() {
+        for(ReportDTO report: service.getReport()) {
+            System.out.println(report.getOrderDate()+ "," + report.getFirstName());
+        }
     }
 
     private  void placeOrder() {
