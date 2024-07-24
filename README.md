@@ -843,7 +843,7 @@ Service classes acts as a facade over DAO operations, decides what needs to be e
 Service classes are used for combining many fine-grained operations into one course grained operation
 
 AccountService.java
-
+```
 // below code is ATOMIC
 // one call from client
 void transferFunds(Account fromAcc, Account toAcc, double amt) {
@@ -857,6 +857,9 @@ void transferFunds(Account fromAcc, Account toAcc, double amt) {
     send SMS
     send Email
 }
+```
+
+
 
 
 
