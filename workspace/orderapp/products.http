@@ -1,0 +1,15 @@
+### @name="GET all Products"
+GET http://localhost:8080/api/products
+Accept: application/json
+
+### @name="Add a Product"
+POST http://localhost:8080/api/products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Konfo",
+  "price": 210000.00,
+  "quantity": 50
+}
+

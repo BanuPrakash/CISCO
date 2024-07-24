@@ -1001,6 +1001,11 @@ Status Code:
 500 --> INTERNAL SERVER ERROR
 300 series is redirection
 
+To test GET request we can use Browser
+To test POST / PUT / DELETE we need clients like POSTMAN or INTELLIJ IDE or any any other client
+
+http://localhost:8080/api/products
+
 
 
 
