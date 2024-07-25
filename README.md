@@ -1332,9 +1332,11 @@ lombok, mysql, jpa, spring data rest, web
 
 No RestController
 No Service class
-
+http://localhost:8080/api/products/
 http://localhost:8080/api/products/search/findByQuantity?qty=98
 http://localhost:8080/api/products/search/findByPriceBetween?low=500&high=10000
 http://localhost:8080/api/products?page=1&size=3
 
 
+
+In case we need to write custom ENDPOINTS or modify existing ENDPOINTS use BasePathAwareController
