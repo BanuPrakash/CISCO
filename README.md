@@ -1415,3 +1415,17 @@ uses compose.yml
 
 http_server_requests_seconds_count is the total number of requests recvied 
 jvm_threads_live_threads
+
+=====================
+
+Caching
+* Client side Caching [Client ]
+* Middle tier [Spring Boot]
+* Server Side Caching [ JPA EHCache]
+
+Client side Caching:
+1) Http Header
+Cache-Control: max-age=604800
+2) ETag 
+The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource. It lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed. 
+

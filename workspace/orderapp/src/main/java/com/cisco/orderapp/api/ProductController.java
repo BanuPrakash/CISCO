@@ -13,6 +13,7 @@ import org.springframework.hateoas.Affordance;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,6 +39,13 @@ public class ProductController {
         else {
             return service.byRange(low, high);
         }
+    }
+
+    // ETAG
+    @GetMapping("/etag/{id}")
+    public ResponseEntity<Product> getByIdEtag(@PathVariable("id") int id) throws ResourceNotFoundException{
+        Product p = service.getProductById(id);
+        return ResponseEntity.ok().eTag(Long.toString(p.hashCode())).body(p);
     }
 
     @GetMapping("/hateoas/{id}")

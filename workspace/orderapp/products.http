@@ -33,3 +33,12 @@ Content-Type: application/json
 }
 
 
+### @name="ETAG Example"
+GET http://localhost:8080/api/products/etag/3
+Accept: application/json
+
+
+### @name="With ETAG"
+GET http://localhost:8080/api/products/etag/3
+Accept: application/json
+If-None-Match: "-1268814553"
