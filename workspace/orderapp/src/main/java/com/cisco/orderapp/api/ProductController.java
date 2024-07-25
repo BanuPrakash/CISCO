@@ -9,10 +9,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Affordance;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.afford;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("api/products")
@@ -31,6 +38,20 @@ public class ProductController {
         else {
             return service.byRange(low, high);
         }
+    }
+
+    @GetMapping("/hateoas/{id}")
+    public EntityModel<Product> getByIdHateos(@PathVariable("id") int id) throws ResourceNotFoundException {
+        Product product = service.getProductById(id);
+        Link selfLink = linkTo(methodOn(ProductController.class).getById(id)).withSelfRel();
+        Affordance update = afford(methodOn(ProductController.class).updateProduct(id, null));
+        Affordance delete = afford(methodOn(ProductController.class).deleteProduct(id));
+
+        Link productsLink = linkTo(methodOn(ProductController.class).getProducts(0,0)).withRel("products");
+        EntityModel<Product> model = EntityModel.of(product, selfLink.andAffordance(update),
+                selfLink.andAffordance(delete),
+                productsLink);
+        return  model;
     }
 
     // GET http://localhost:8080/api/products/3
@@ -62,10 +83,21 @@ public class ProductController {
             return service.getProductById(id);
     }
 
+    public  class StringType {
+        String msg;
+        public StringType(String msg) {
+            this.msg = msg;
+        }
+
+        @Override
+        public String toString() {
+            return msg;
+        }
+    }
     @Hidden
     @DeleteMapping("/{id}")
-    public String deleteProduct(@PathVariable("id") int id) {
+    public StringType deleteProduct(@PathVariable("id") int id) {
         // service.deleteProduct(id);
-        return "delete product!!!";
+        return new StringType("delete product!!!");
     }
 }

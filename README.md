@@ -1256,3 +1256,58 @@ https://raml.org/
 ```
 
 http://localhost:8080/swagger-ui/index.html
+
+======================================================
+
+Richardson Maturity Model
+
+Level 0: SWAMP of POX
+In a level 0 scenario, one service endpoint at some URI,
+payload used to decide what action needs to be taken
+POST --> method of Request
+
+Level 1: Resouces
+Different URIs for different Resources
+POST --> method of Request
+http://server/products
+http://server/orders
+
+Level 2: Resources are verbs [Where we are now]
+GET, POST, PUT , PATCH , DELETE
+http://server/products
+http://server/orders
+
+Level 3: Hypermedia Controls [ HATEOAS]
+Hypermedia As The Engine of Application State
+
+1) place Order
+    get links for Payment and Cancel
+2) After Payment
+    get links for trackking order and changing address
+3) After deleviry
+    get link for feedback
+
+```
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+</dependency>
+```
+
+WebMvcLinkBuilder --> builder to ease building link instances pointing to Spring MVC Controllers/ RestController
+linkTo()
+afford()
+
+RepresentationModel --> Entitymodel or Collectionmodel + Links
+
+EntityModel --> Entity + Links
+CollectionModel --> List<Enity> + links
+
+HyperMedia As language ==> contains only links
+HAL_FORMS --> links + template containing METHOD of REQUEST + Paylod
+
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL_FORMS)
+
+default is 
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
+=====

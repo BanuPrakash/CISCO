@@ -37,6 +37,11 @@
 			<version>1.13</version>
 		</dependency>
 
+		<!-- HATEOS -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
