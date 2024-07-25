@@ -1,0 +1,12 @@
+### @name="Employee Patch Update"
+
+PATCH http://localhost:8080/api/employees/123
+Content-Type: application/json-patch+json
+Accept: application/json
+
+[
+  {"op": "replace", "path":"/title", "value":  "Team lead"},
+  {"op": "remove", "path" :  "/personal/phone"},
+  {"op":  "add", "path" : "/personal/email", "value": "smitha@cisco.com"},
+  {"op": "add", "path":  "/programmingSkills/1", "value":  "Spring Boot"}
+]

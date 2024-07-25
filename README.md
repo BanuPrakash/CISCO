@@ -1131,9 +1131,111 @@ Employee raises a ticket
 Another employee will resolve a ticket
 
 ================
+```
+package com.example.shopapp.cfg;
+
+
+import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+
+import java.time.Duration;
+
+@Configuration
+public class RedisConfig {
+    @Bean
+    public RedisCacheConfiguration cacheConfiguration() {
+        return RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofMinutes(60))
+                .disableCachingNullValues()
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+    }
+
+    @Bean
+    public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
+        return (builder) -> builder
+                .withCacheConfiguration("productCache",
+                        RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(10)))
+                .withCacheConfiguration("customerCache",
+                        RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(5)));
+    }
+}
+
+```
 
 Testing
 Caching
 Async request handling
 ...
 
+Day 4
+
+Recap of Day 3:
+```
+    Building RESTful WS.
+    @RestController, @RequestMapping, @GetMapping, @PostMapping, @PutMapping
+    @DeleteMapping, @Patchmapping
+
+    @RequestBody ==> to convert payload to entity based on Content-type
+    @PathVariable to read Path Parameter /
+    @RequestParam to read Query parameters ?
+
+    @ControllerAdvice and @ExceptionHandler
+    ResponseEntity ==> data + headers + status code
+
+    @Transactional --> method level to specify that code in method is atomic in nature [ commit or rollback]
+    Dirty Checking --> within a Tranctional boundary if an entity changes [dirty] JPA will flush the new state of entity to database by issuing UPDATE SQL
+```
+
+
+
+PATCH vs PUT for Updating
+
+PUT to update entity --> use this if entity has less attributes and major update is happening
+{
+  "biscuits": [
+    { "name": "Digestive" },
+    { "name": "Choco Leibniz" }
+  ]
+}
+
+to Update:
+payload:
+{
+  "biscuits": [
+    { "name": "Digestive" },
+    {"name" , "Ginger Nut"},
+    { "name": "Choco Leibniz" }
+  ]
+}
+PATCH is a technique for updating the resources when the client transmits partial data that will be updated without changing the whole data.
+
+```
+<!-- https://mvnrepository.com/artifact/com.github.java-json-tools/json-patch -->
+<dependency>
+    <groupId>com.github.java-json-tools</groupId>
+    <artifactId>json-patch</artifactId>
+    <version>1.13</version>
+</dependency>
+
+```
+https://jsonpatch.com/
+
+{ "op": "add", "path": "/biscuits/1", "value": { "name": "Ginger Nut" } }
+
+Operations: add, remove, replace, copy, move, test
+
+mapper.writeValueAsString(employee) ==> Employee to JSON
+
+```
+{
+    "id":123,
+"title":"Sr.Programmer",
+"personal":{"firstName":"Smitha","lastName":"Patil","phone":"1234567890"},
+"programmingSkills":["Java","Python"]
+}
+
+``

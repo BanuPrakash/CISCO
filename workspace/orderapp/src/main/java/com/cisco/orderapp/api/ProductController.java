@@ -2,6 +2,10 @@ package com.cisco.orderapp.api;
 
 import com.cisco.orderapp.entity.Product;
 import com.cisco.orderapp.service.OrderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +33,16 @@ public class ProductController {
     }
 
     // GET http://localhost:8080/api/products/3
+    @Operation(
+            description = "Service that return a Product",
+            summary = "This service returns a Product by the ID",
+            responses = {
+                    @ApiResponse(description = "Successful Operation", responseCode = "200",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = Product.class))),
+                    @ApiResponse(responseCode = "404", description = "Product  Not found", content = @Content),
+                    @ApiResponse(responseCode = "401", description = "Authentication Failure", content = @Content(schema = @Schema(hidden = true)))
+            })
     @GetMapping("/{id}")
     public Product getById(@PathVariable("id") int id) throws ResourceNotFoundException{
         return service.getProductById(id);
@@ -47,4 +61,9 @@ public class ProductController {
             return service.getProductById(id);
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable("id") int id) {
+        // service.deleteProduct(id);
+        return "delete product!!!";
+    }
 }
