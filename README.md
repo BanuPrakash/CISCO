@@ -1467,4 +1467,26 @@ Consuming Endpoints:
 2) WebClient needs additional dependency
 3) RestClient [ better version of WebClient]
 
+===========
 
+```
+POST  http://localhost:8080/api/discharge
+Content-Type: application/json
+Accept: application/json
+
+{
+  "patientId": "1234",
+  "patientName": "George"
+}
+
+// Synchronouns code --> Blocking Code
+public String dischargePatient(String pid, String name) {
+    log.info("....");
+    billingService.processBill();
+    medicalRecordsService.updatePatientHistory();
+    houseKeepingService.cleanAndAssign();
+    notificationService.notifyPatients();
+}
+
+Solution is Events and Listeners
+```
