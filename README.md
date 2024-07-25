@@ -1380,3 +1380,38 @@ http://localhost:8080/actuator/metrics/jvm.memory.max
 ab -c 100 -n 300 http://localhost:8080/api/products
 
 http://localhost:8080/actuator/metrics/http.server.requests
+http://localhost:8080/actuator/metrics/jvm.threads.peak
+
+====
+
+Metrics
+Caching
+RESTful WS clients [ consuming]
+Async operation
+
+
+Actuator gives metrics at a given point of time when request is made. No over a period of time
+
+https://prometheus.io/
+* Prometheus is an open-source systems monitoring and alerting toolkit
+* time series collection happens via a pull model over HTTP
+* the main Prometheus server which scrapes and stores time series data
+
+Prometheus --> alert rules --> trigger an alert --> AlertManager [EMAIL / SLACK / Messaging ]
+
+```
+	<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
+http://localhost:8080/actuator/prometheus
+
+http://localhost:9090/
+
+docker compose up -d
+uses compose.yml
+
+```
+
+http_server_requests_seconds_count is the total number of requests recvied 
+jvm_threads_live_threads
