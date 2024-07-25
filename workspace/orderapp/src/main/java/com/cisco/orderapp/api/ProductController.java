@@ -2,6 +2,7 @@ package com.cisco.orderapp.api;
 
 import com.cisco.orderapp.entity.Product;
 import com.cisco.orderapp.service.OrderService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -61,6 +62,7 @@ public class ProductController {
             return service.getProductById(id);
     }
 
+    @Hidden
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable("id") int id) {
         // service.deleteProduct(id);

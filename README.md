@@ -1239,3 +1239,20 @@ mapper.writeValueAsString(employee) ==> Employee to JSON
 }
 
 ``
+
+Documentation of RESTful Endpoints
+* RAML: RESTful API Modeling Language is a YAML-based language for describing static APIs.
+https://raml.org/
+
+* OpenAPI -- Swagger
+--> by default it generates documentation by scanning @Controller and @RestController 
+```
+<!-- OpenAPI -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+```
+
+http://localhost:8080/swagger-ui/index.html
