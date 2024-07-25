@@ -1459,3 +1459,12 @@ public Product getByIdCache(@PathVariable("id") int id) throws ResourceNotFoundE
     public StringType deleteProduct(@PathVariable("id") int id) {
 
 ```
+
+Consuming Endpoints and Async operations
+
+Consuming Endpoints:
+1) RestTemplate
+2) WebClient needs additional dependency
+3) RestClient [ better version of WebClient]
+
+
