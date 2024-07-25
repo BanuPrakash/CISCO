@@ -1310,4 +1310,31 @@ HAL_FORMS --> links + template containing METHOD of REQUEST + Paylod
 
 default is 
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
+
+Spring Data REST : 
+* takes the features from Spring HATEOAS and Spring Data JPA to automatically combine and add links
+* We don't need to write @RestController
+* We don't need to manually create links
+* all methods of JpaRepository / MongoRepository / CrudRepositry are exposed as endpoints
+
+Good for Inventory based application
+
+Note: Can't combine Spring Data REST with our traditional RESTful WS
+Solution : MicroServices
+
 =====
+
+New Spring Boot application for Spring Data REST
+lombok, mysql, jpa, spring data rest, web
+
+1) copy application.properties
+2) copy Product.java, ProductDao.java
+
+No RestController
+No Service class
+
+http://localhost:8080/api/products/search/findByQuantity?qty=98
+http://localhost:8080/api/products/search/findByPriceBetween?low=500&high=10000
+http://localhost:8080/api/products?page=1&size=3
+
+
