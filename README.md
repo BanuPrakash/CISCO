@@ -1340,3 +1340,43 @@ http://localhost:8080/api/products?page=1&size=3
 
 
 In case we need to write custom ENDPOINTS or modify existing ENDPOINTS use BasePathAwareController
+
+======================================
+
+Health Check
+Distributed System composed of many parts like database, redis, queues and other services..
+Health Check tells us the status of our running application
+Metrics: status of Heap, threads, CPU ,...
+
+Spring boot Actuator
+
+```
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+application.properties
+management.endpoint.health.show-details=always
+management.endpoints.web.exposure.exclude=
+management.endpoints.web.exposure.include=health, info
+management.metrics.distribution.percentiles-histogram.http.server.requests=true
+
+```
+has many pre-defined health indicators:
+* DataSourceHealthIndicator
+* MongoHealthIndicator
+* RedisHealthIndicator
+* CassandraHealthIndicator
+
+we can write our own HealthIndicator
+
+
+http://localhost:8080/actuator/metrics/jdbc.connections.max
+http://localhost:8080/actuator/metrics/
+http://localhost:8080/actuator/metrics/jvm.memory.max
+
+
+ab -c 100 -n 300 http://localhost:8080/api/products
+
+http://localhost:8080/actuator/metrics/http.server.requests
