@@ -9,6 +9,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.hateoas.Affordance;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
@@ -48,6 +52,20 @@ public class ProductController {
         return ResponseEntity.ok().eTag(Long.toString(p.hashCode())).body(p);
     }
 
+
+    //SpEL # , $
+    @GetMapping("/cache/{id}")
+    @Cacheable(value = "productCache", key = "#id")
+    public Product getByIdCache(@PathVariable("id") int id) throws ResourceNotFoundException{
+        System.out.println("Cache miss!!!");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return service.getProductById(id);
+    }
+
     @GetMapping("/hateoas/{id}")
     public EntityModel<Product> getByIdHateos(@PathVariable("id") int id) throws ResourceNotFoundException {
         Product product = service.getProductById(id);
@@ -85,6 +103,7 @@ public class ProductController {
     }
 
     // PUT http://localhost:8080/api/products/3
+    @CachePut(value = "productCache", key = "#id")
     @PutMapping("/{id}")
     public  Product updateProduct(@PathVariable("id") int id, @RequestBody Product p) throws ResourceNotFoundException{
             service.updateProduct(id, p);
@@ -102,6 +121,8 @@ public class ProductController {
             return msg;
         }
     }
+
+    @CacheEvict(value = "productCache", key = "#id")
     @Hidden
     @DeleteMapping("/{id}")
     public StringType deleteProduct(@PathVariable("id") int id) {

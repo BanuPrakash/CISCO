@@ -1421,6 +1421,12 @@ jvm_threads_live_threads
 Caching
 * Client side Caching [Client ]
 * Middle tier [Spring Boot]
+```
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+```
 * Server Side Caching [ JPA EHCache]
 
 Client side Caching:
@@ -1429,3 +1435,27 @@ Cache-Control: max-age=604800
 2) ETag 
 The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource. It lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed. 
 
+By default Spring Boot provides ConcurrentMapCache
+
+```
+@SpringBootApplication
+@EnableCaching
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL_FORMS)
+public class OrderappApplication {
+
+
+@GetMapping("/cache/{id}")
+@Cacheable(value = "productCache", key = "#id")
+public Product getByIdCache(@PathVariable("id") int id) throws ResourceNotFoundException{
+  
+
+ @CachePut(value = "productCache", key = "#id")
+    @PutMapping("/{id}")
+    public  Product updateProduct(@PathVariable("id")
+
+ @CacheEvict(value = "productCache", key = "#id")
+    @Hidden
+    @DeleteMapping("/{id}")
+    public StringType deleteProduct(@PathVariable("id") int id) {
+
+```
