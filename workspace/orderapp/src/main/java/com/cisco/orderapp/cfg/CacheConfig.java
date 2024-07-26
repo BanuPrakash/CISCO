@@ -12,10 +12,10 @@ public class CacheConfig {
     @Autowired
     CacheManager cacheManager;
 //https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions
-    @Scheduled(fixedRate = 2000)
+    //@Scheduled(fixedRate = 2000)
 
     // every half-hour
-//    @Scheduled(cron = "0 0/30 * * * *")
+   @Scheduled(cron = "0 0/30 * * * *")
     public void clearCache() {
         System.out.println("Cache Cleared!!!");
         cacheManager.getCacheNames().forEach(cache -> {

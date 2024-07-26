@@ -6,6 +6,12 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 @SpringBootApplication

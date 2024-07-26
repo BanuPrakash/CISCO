@@ -30,6 +30,12 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<!-- Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 		<!-- Cache -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -1525,3 +1525,48 @@ PostInterface.java
 UserInterface.java
 AppConfig.java
 
+PostServiceAggregator.java
+PostController.java
+
+=================================
+
+Spring Security
+Authentication and Authorization
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+Including above dependecy does this:
+1) All resources are protected
+2) Generates a user with username="user" and password=<<generated>>
+Using generated security password: 7d855a75-dec2-4125-a967-6921b8edfa5e
+3) creates a login and logout pages
+http://localhost:8080/logout
+
+filters
+
+/api/*
+
+principal: username
+credentials: password
+isAuthenticated: false
+
+Authentication
+principal: roger
+credentials: null
+isAuthenticated: true
+Authorities: "USER"
+
+JSESSIONID
+RWE126CD
+
+
+
+
+
+
+
+
+
