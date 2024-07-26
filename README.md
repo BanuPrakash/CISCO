@@ -1490,3 +1490,29 @@ public String dischargePatient(String pid, String name) {
 
 Solution is Events and Listeners
 ```
+
+Day 5:
+
+* Monitoring using Actuator and Prometheus
+* Caching using ETag and @Cachable
+* @Scheduling -> @Scheduled --> fixedRate or CRON expression
+* HATEOAS --> Having links along with Representation, EntityModel or CollectionModel, WebMVCLinkBuilder
+* Spring Data Rest; build on top of Spring Data and REST, @BasePathAwareController instead of @RestController
+* ApplicationEvent and @EventListener
+* @EnableAsync creates a Thread pool
+@Async is used to specify that a particular function should execute in a seperate thread
+
+
+
+RestClient with HttpExchange
+
+Spring Declarative HTTP Client using @HttpExchange
+Exchange Methods
+We can use the following annotations to mark a method as HTTP service endpoint:
+
+@HttpExchange: is the generic annotation to specify an HTTP endpoint. When used at the interface level, it applies to all methods.
+@GetExchange: specifies @HttpExchange for HTTP GET requests.
+@PostExchange: specifies @HttpExchange for HTTP POST requests.
+@PutExchange: specifies @HttpExchange for HTTP PUT requests.
+@DeleteExchange: specifies @HttpExchange for HTTP DELETE requests.
+@PatchExchange: specifies @HttpExchange for HTTP PATCH requests.
