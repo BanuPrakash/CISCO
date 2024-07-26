@@ -1550,6 +1550,11 @@ http://localhost:8080/logout
 
 
 
+spring.jpa.defer-datasource-initialization=true
+spring.sql.init.mode=always
+
+will execute schema.sql and data.sql in resources folder
+
 
 
 
