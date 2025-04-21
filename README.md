@@ -214,3 +214,7 @@ embedded JETTY server
 mvn jetty:run --> compile, package, start jetty server and deploy war package on jetty --> default it runs on 8080 port
 
 http://localhost:8080/hello
+
+mvn jetty:run -Djetty.http.port=1234
+
+src/main/webapp --> folder for static resources like html / css and JS
