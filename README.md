@@ -249,3 +249,127 @@ C --> Controller [Servlet's are good for Controller] --> application logic
 Don't put presentation logic in Servlet
 
 JSP can be used for Server Side Rendering of pages. In JSP we can have static + dynamic content
+
+=======================
+
+Spring Framework : Current version 6.x
+Spring Boot : Current version 3.x
+
+Spring is a light weight container for building enterprise applications.
+
+Spring core module container provides life cycle management of beans and wiring depenencies.
+
+Servlet engine also manages lifecycle of Servlet's and wires request and response objects. Can't manage or wire used specific classes like DAO, service, ...
+
+Term bean: any object which is managed within the spring container is termed as a bean.
+
+What is Dependency Injection?
+All real world objects works on DI
+
+Why DI?
+* Loose coupling
+* Switching between strategies is easy
+* Testing in isolation
+
+
+========
+
+Spring needs metadata for managing beans - XML or annotation
+
+```
+    public interface EmployeeDao {
+        void addemployee(Employee e);
+    }
+
+    public class EmployeeDaoJdbcImpl implements EmployeeDao {
+         public void addemployee(Employee e) {...}
+    }
+
+     public class EmployeeDaoMongoImpl implements EmployeeDao {
+         public void addemployee(Employee e) {...}
+    }
+
+    public class AppService {
+        private EmployeeDao empDao;
+
+        private void setEmpDao(EmployeeDao edao) {
+            empDao = edao;
+        }
+
+        public void insert(Employee e) {
+            empDao.addemployee(e);
+        }
+    }
+
+beans.xml
+<beans>
+    <bean id="jdbc" class="pkg.EmployeeDaoJdbcImpl" />
+    <bean id="mongo" class="pkg.EmployeeDaoMongoImpl" />
+    <bean id="service" class="pkg.AppService">
+            <property name="empDao" ref = "jdbc" />
+    </bean>
+</beans>
+
+Statement to create Spring container:
+ApplicationContext ctx = new ClassPathApplicationContext("beans.xml");
+
+AppService service = ctx.getBean("service");
+
+```
+
+Annotation as metadata:
+Spring instantiates classes which contain one of these annotations at class level:
+1) Component
+2) Repository
+3) Service
+4) Controller
+5) RestController
+6) Configuration
+7) ControllerAdvice
+
+```
+    @Repository
+    public class EmployeeDaoJdbcImpl implements EmployeeDao {
+         public void addemployee(Employee e) {...}
+    }
+
+    @Service
+     public class AppService {
+        @Autowired
+        private EmployeeDao empDao;
+
+        public void insert(Employee e) {
+            empDao.addemployee(e);
+        }
+    }
+
+    Default behaviour of  @Autowired is to check if the container has any object of the type and wire
+
+    ApplicationContext ctx = new AnnotationConfigApplicationContext();
+    ctx.scan("com.cisco.prj");
+    ctx.refresh();
+    AppService service = ctx.getBean("appService");
+```
+
+Why Spring Boot?
+Highly opiniated framework on top of spring framework, lots of configuration comes out of the box.
+Examples:
+1) Unit testing framework - JUnit is bundled by default, for mocking mockito
+2) Database applications --> Connection pool is configured by default
+3) If we are building web applications ==> Tomcat is configured as default servlet engine
+4) Easy to dockerize 
+5) Writing standalone and web applications are similar [main is the entry point]
+
+Option 1 of creating Spring boot applicaiton:
+File --> New --> Project --> Spring Initializer
+
+Option 2:
+https://start.spring.io/
+
+
+@SpringBootApplication is 3 in one:
+1) @Configuration
+2) @ComponentScan
+3) @EnableAutoConfiguration --> default opiniated config like DB connection pool
+
+SpringApplication.run(DemoApplication.class, args); creates Spring container
