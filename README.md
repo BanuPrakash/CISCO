@@ -232,3 +232,20 @@ Steps to connect to database:
 5) close the connection
 
 
+Recap:
+Maven based java project.
+pom.xml --> dependency, compiler, packaging [default is jar], plugins for war, jetty.
+
+mvn clean
+mvn compile
+mvn package
+mvn jetty:run
+
+MVC Architecture pattern
+M --> Model --> Business data and logic
+V --> View --> JSP Java Server Pages [ Presentation logic]
+C --> Controller [Servlet's are good for Controller] --> application logic
+
+Don't put presentation logic in Servlet
+
+JSP can be used for Server Side Rendering of pages. In JSP we can have static + dynamic content

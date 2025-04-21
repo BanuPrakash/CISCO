@@ -33,6 +33,14 @@ public class ProductDaoJdbcImpl implements  ProductDao{
             ps.executeUpdate(); // INSERT, UPDATE and DELETE
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            if( con!= null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 
@@ -53,6 +61,14 @@ public class ProductDaoJdbcImpl implements  ProductDao{
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            if( con!= null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
         return products;
     }
