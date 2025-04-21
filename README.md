@@ -230,3 +230,5 @@ Steps to connect to database:
 3.2) PreparedStatement if SQL takes IN parameters from User
 4) ResultSet is a cursor for fetched records from database if SELECT statement is used
 5) close the connection
+
+
