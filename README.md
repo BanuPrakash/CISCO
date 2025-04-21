@@ -177,3 +177,14 @@ HttpServletRequest encapsulates data from client [ client data, browser, OS]
 HttpServletResponse is used to write data back to client
 ===========================================
 
+Add mysql/bin to path
+
+mysql -u root -p
+
+mysql> create database AD_JAVA
+mysql> use AD_JAVA
+mysql> create table products (id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), price double);
+
+
+
+
