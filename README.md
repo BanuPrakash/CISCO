@@ -53,3 +53,127 @@ mysql> exit
 
 ```
 
+Day  1:
+Web application and database
+
+Day 2, 3, 4: Spring Boot and JPA [Hibernate], Building RESTful WS
+
+Day 5: Security and Introduction to MicroServices
+
+==================================
+
+Part 1:
+
+Web application development and JDBC
+
+JSE: Java Std Edition
+JEE: Java Enterprise Edition provides Servlet API for building web application.
+
+Apache Tomcat / Jetty  are popular open-source Java servlet container and HTTP web server, primarily used to host web applications and APIs built with Java.
+
+1) Server Side Rendering
+    Presentation pages are sent to client.
+    Pros:
+    * Thin clients
+    * Faster 
+    Cons:
+    * Can't have heterogenous clients like Desktop / Mobile / Tv ...
+    * Heavy payload
+2) Client Side Rendering
+    Pros:
+        * Lightweight payload
+        * can be heterogenous clients like Desktop / Mobile / Tv
+    Cons:
+        * Heavy clients
+        * If not handled properly, this can be slow
+
+Rendering ==> data to presentation logic
+
+--> SSR
+
+Servlet technology uses Java for SSR.
+* Servlet
+* Filter
+* Listener
+* JSP pages
+
+Servlet's are special java objects which execute within the servlet engine/ servlet container / web container
+
+HTTP REquests: URL and MEthod of request
+
+GET --> making request from Address bar and hyperlink by default is GET
+POST --> generally FORM submission [ send data to server as payload] which needs to be stored in persist store
+Create a new resource on server
+PUT/PATCH --> Modify existing resource
+DELETE --> remove a resource on server
+
+CRUD --> POST GET PUT/PATCH DELETE
+
+Mapping between URL and Servlet 
+http://server.com/registration
+http://server.com/products
+http://server.com/orders
+
+```
+    public class UserServlet extends HttpServlet {
+        public void doGet(HttpServletRequest req, HttpServletResponse res)  {
+
+        }
+         public void doPost(HttpServletRequest req, HttpServletResponse res)  {
+            
+        }
+         public void doPut(HttpServletRequest req, HttpServletResponse res)  {
+            
+        }
+         public void doDelete(HttpServletRequest req, HttpServletResponse res)  {
+            
+        }
+    }
+
+HttpServlet has default implementations for all the doXXX() methods ==> returns 400 BAD REQUEST
+```
+
+IDEMPOTENT: multiple identical requests to an endpoint have the same effect as a single request.
+
+GET is IDEMPOTENT
+PUT / POST : not IDEMPOTENT
+
+GET and DELETE are safe methods
+
+Mapping an URL to Servlet:
+
+1) Deployment descriptor --> web.xml
+```
+    <servlet>
+        <servlet-name>First</servlet-name>
+        <servlet-class>pkg.UserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+         <servlet-name>First</servlet-name>
+         <url-pattern> /register, /login </url-pattern>
+    </serlvet-mapping>
+      <servlet>
+        <servlet-name>Sec</servlet-name>
+        <servlet-class>pkg.ProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+         <servlet-name>Sec</servlet-name>
+         <url-pattern> /products </url-pattern>
+    </serlvet-mapping>
+```
+2) Annotation 
+
+@WebServlet("/products")
+public class ProductServlet extends HttpServlet {}
+
+GET 
+http://localhost:8080/products
+
+
+HttpServletRequest and HttpServletResponse objects are created by the engine and injected to the servlet's method
+HttpServletRequest encapsulates data from client [ client data, browser, OS]
+HttpServletResponse is used to write data back to client
+===========================================
+
