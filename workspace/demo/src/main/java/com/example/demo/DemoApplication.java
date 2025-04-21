@@ -13,6 +13,12 @@ public class DemoApplication {
 
         AppService service = ctx.getBean("appService", AppService.class);
         service.insert();
+
+        System.out.println("******");
+        String[] beans = ctx.getBeanDefinitionNames();
+        for(String name : beans) {
+            System.out.println(name);
+        }
     }
 
 }

@@ -373,3 +373,38 @@ https://start.spring.io/
 3) @EnableAutoConfiguration --> default opiniated config like DB connection pool
 
 SpringApplication.run(DemoApplication.class, args); creates Spring container
+
+Description:
+
+Field employeeDao in com.example.demo.service.AppService required a single bean, but 2 were found:
+	- employeeDaoDbImpl: 
+	- employeeDaoMongoImpl:
+
+Solution 1:
+using @Primary
+```
+@Repository
+@Primary
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+
+@Repository
+public class EmployeeDaoDbImpl implements EmployeeDao{
+
+```
+
+Solution 2:
+using @Qualifier
+```
+@Repository
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+
+@Repository
+public class EmployeeDaoDbImpl implements EmployeeDao{
+
+@Service
+public class AppService {
+    @Autowired
+    @Qualifier("employeeDaoMongoImpl")
+    private EmployeeDao employeeDao; // wiring is done by spring container
+
+```

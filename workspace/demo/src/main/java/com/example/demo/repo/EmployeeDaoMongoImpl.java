@@ -4,10 +4,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 @Repository
-
-public class EmployeeDaoDbImpl implements EmployeeDao{
+public class EmployeeDaoMongoImpl implements EmployeeDao{
     @Override
     public void addEmployee() {
-        System.out.println("Stored in database!!!");
+        System.out.println("Mongo Store!!!");
     }
 }
