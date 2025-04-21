@@ -177,14 +177,39 @@ HttpServletRequest encapsulates data from client [ client data, browser, OS]
 HttpServletResponse is used to write data back to client
 ===========================================
 
+MySQL:
+```
 Add mysql/bin to path
 
 mysql -u root -p
 
-mysql> create database AD_JAVA
-mysql> use AD_JAVA
+mysql> create database AD_JAVA;
+mysql> use AD_JAVA;
 mysql> create table products (id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), price double);
+```
+===================
+
+Maven based project:
+Maven is a build tool, manage dependencies for the project, running goals like compilation, testing, building, ...
 
 
 
+mysql-connector-j --> MySQL JDBC drivers 
+jakarta.servlet-api --> servlet api to build web application
+lombok --> code generation tool, simplifies creating data classes
+
+JAR --> Java Archive --> Library
+WAR --> Web Archive --> required to deploy on servlet engine
+EAR --> Enterprise Archive
+
+mvn compile --> uses compiler plugin
+mvn package --> sees package type as below and uses war-plugin, default is jar-plugin [built-in]
+
+```
+<packaging>war</packaging>
+```
+
+embedded JETTY server
+
+mvn jetty:run --> compile, package, start jetty server and deploy war package on jetty --> default it runs on 8080 port
 
