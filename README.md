@@ -218,3 +218,15 @@ http://localhost:8080/hello
 mvn jetty:run -Djetty.http.port=1234
 
 src/main/webapp --> folder for static resources like html / css and JS
+
+JDBC --> integration library for java to connect to RDBMS
+JDBC provides only interfaces, implementation classes are provided by database vendors
+
+Steps to connect to database:
+1) load drivers 
+2) establish a database connection
+3) Send SQL for DML
+3.1) Statement interface if SQL is fixed and same for all request
+3.2) PreparedStatement if SQL takes IN parameters from User
+4) ResultSet is a cursor for fetched records from database if SELECT statement is used
+5) close the connection
