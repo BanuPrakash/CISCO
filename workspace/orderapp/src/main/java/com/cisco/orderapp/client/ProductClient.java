@@ -16,9 +16,27 @@ public class ProductClient implements CommandLineRunner {
     // this method is called by Spring once all beans are initialized within spring container
     @Override
     public void run(String... args) throws Exception {
-        printProducts();
+//        printProducts();
         System.out.println("****");
-        getProductById();
+//        getProductById();
+        System.out.println("****");
+        System.out.println("Get Products By Range!!!");
+        printByRange();
+
+        System.out.println("Update the product price");
+        updatePrice();
+    }
+
+    private void updatePrice() {
+        Product p = orderService.updateProduct(2, 8900.50);
+        System.out.println(p);
+    }
+
+    private void printByRange() {
+        List<Product> products = orderService.getByRange(6000, 60_000);
+        for(Product p : products) {
+            System.out.println(p);
+        }
     }
 
     private void getProductById() {

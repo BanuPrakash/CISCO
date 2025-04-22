@@ -24,5 +24,4 @@ public class Customer {
 
     @Column(name="LNAME")
     private String lastName;
-
 }

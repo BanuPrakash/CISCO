@@ -4,6 +4,7 @@ import com.cisco.orderapp.entity.Customer;
 import com.cisco.orderapp.entity.Product;
 import com.cisco.orderapp.repo.CustomerRepo;
 import com.cisco.orderapp.repo.ProductRepo;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,16 @@ public class OrderService {
     // prefer constructor DI this instead of @Autowired
     private final ProductRepo productRepo;
     private final CustomerRepo customerRepo;
+
+    @Transactional
+    public Product updateProduct(int id, double price) {
+        productRepo.updatePrice(id, price);
+        return  getProductById(id);
+    }
+
+    public  List<Product> getByRange(double low, double high) {
+        return productRepo.findByRange(low, high);
+    }
 
     public List<Product> getProducts() {
         return  productRepo.findAll();

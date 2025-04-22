@@ -672,3 +672,24 @@ Obtain processors from classpath select
 ```
 
 update products set qty = 100 where 1 = 1;
+
+Mapping associations and Transactions
+
+===============================
+
+JPA Projections and Custom Queries
+
+SQL is based on table and columns
+JP-QL is based on class name and it's fields [ Case-sensitive ]
+
+By default built-in methods for INSERT and DELETE are Transactional.
+Custom query or custom methods of performing INSERT, DELETE or UPDATE needs to be marked as @Transactional generally done in Service Tier code.
+
+
+
+
+
+
+
+
+
