@@ -685,7 +685,8 @@ JP-QL is based on class name and it's fields [ Case-sensitive ]
 By default built-in methods for INSERT and DELETE are Transactional.
 Custom query or custom methods of performing INSERT, DELETE or UPDATE needs to be marked as @Transactional generally done in Service Tier code.
 
-
+Update using DIRTY CHECKING
+Dirty checking is a mechanism in ORM that automatically detects and synchronizes changes made to the entities within Transactional boundaries without requiring explicit update queries. 
 
 
 

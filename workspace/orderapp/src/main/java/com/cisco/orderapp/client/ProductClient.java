@@ -21,10 +21,18 @@ public class ProductClient implements CommandLineRunner {
 //        getProductById();
         System.out.println("****");
         System.out.println("Get Products By Range!!!");
-        printByRange();
+//        printByRange();
 
         System.out.println("Update the product price");
-        updatePrice();
+//        updatePrice();
+
+        System.out.println("Update the product qty");
+        updateQty();
+    }
+
+    private void updateQty() {
+        Product p = orderService.updateProductQty(3); // buy one LG AC
+        System.out.println(p);
     }
 
     private void updatePrice() {

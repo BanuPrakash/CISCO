@@ -22,6 +22,13 @@ public class OrderService {
     private final CustomerRepo customerRepo;
 
     @Transactional
+    public Product updateProductQty(int id) {
+        Product p = getProductById(id); // fetch from database
+        p.setQuantity(p.getQuantity() - 1); // product became dirty --> UPDATE SQL is issued by ORM
+        return  p;
+    }
+
+    @Transactional
     public Product updateProduct(int id, double price) {
         productRepo.updatePrice(id, price);
         return  getProductById(id);
