@@ -14,7 +14,7 @@ public class CustomerClient implements CommandLineRunner {
     // execute as soon as spring context is created and initialized
     @Override
     public void run(String... args) throws Exception {
-        insertCustomers();
+//        insertCustomers();
     }
 
     private void insertCustomers() {

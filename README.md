@@ -688,9 +688,94 @@ Custom query or custom methods of performing INSERT, DELETE or UPDATE needs to b
 Update using DIRTY CHECKING
 Dirty checking is a mechanism in ORM that automatically detects and synchronizes changes made to the entities within Transactional boundaries without requiring explicit update queries. 
 
+https://www.database-answers.com/data_models/
+
+https://martinfowler.com/bliki/DomainDrivenDesign.html
+https://martinfowler.com/bliki/BoundedContext.html
+
+orders and lineitems
+
+Identify Root aggregate and entity mappings for : Uber / Ola / BlueDrive
+
+ @JoinColumn used with ManyToOne introduces FK in owning table / parent
+ @JoinColumn used with OneToMany introduces FK in child table
+
+========
+
+Without Cascade:
+```
+Order {
+     @OneToMany
+    @JoinColumn(name="order_fk")
+    private List<LineItem> items = new ArrayList<>();
+}
+```
+
+assume one order has 4 items.
+Inserting:
+```
+orderDao.save(order);
+itemDao.save(i1);
+itemDao.save(i2);
+itemDao.save(i3);
+itemDao.save(i4);
+```
+
+Delete:
+```
+orderDao.delete(order);
+itemDao.delete(i1);
+itemDao.delete(i2);
+itemDao.delete(i3);
+itemDao.delete(i4);
+```
+
+======
+
+With Cascade:
+```
+    Order {
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="order_fk")
+    private List<LineItem> items = new ArrayList<>();
+    }
+
+```
 
 
+assume one order has 4 items.
+Inserting: order saves its line items
+orderDao.save(order);
 
 
+Delete: deleting order deletes its line items also.
+orderDao.delete(order);
+
+=========================
+
+EAGER and LAZY FETCHING.
+By default one to many is LAZY LOADING/FETCHING
+By default ManyToOne is EAGER fetching
+
+orderDao.findById(1); // select * from orders where oid = 1;
+items are not fetched.
+Customer is fetched.
+
+EAGER
+```
+@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="order_fk")
+    private List<LineItem> items = new ArrayList<>();
+
+
+orderDao.findById(1); // select * from orders where oid = 1;
+items of the orders are also fetched 
+```
+
+@Transactional --> Atomic operation
+All operatins in methods commits or rollback
+* Save Order
+* save items
+* update product qty
 
 

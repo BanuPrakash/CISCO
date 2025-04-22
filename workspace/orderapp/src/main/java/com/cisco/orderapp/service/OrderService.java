@@ -1,8 +1,11 @@
 package com.cisco.orderapp.service;
 
 import com.cisco.orderapp.entity.Customer;
+import com.cisco.orderapp.entity.LineItem;
+import com.cisco.orderapp.entity.Order;
 import com.cisco.orderapp.entity.Product;
 import com.cisco.orderapp.repo.CustomerRepo;
+import com.cisco.orderapp.repo.OrderRepo;
 import com.cisco.orderapp.repo.ProductRepo;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -20,6 +23,38 @@ public class OrderService {
     // prefer constructor DI this instead of @Autowired
     private final ProductRepo productRepo;
     private final CustomerRepo customerRepo;
+    private final OrderRepo orderRepo;
+
+    /*
+        {
+            customer: { "email": "roger@cisco.com"},
+            items: [
+                { product : {id: 3}, qty: 1 },
+                { product : {id: 1}, qty: 2 }
+            ]
+        }
+     */
+    // Atomic operation, everything commits
+    // any exception rollback entire thing
+    // Transactional is also used here for DIRTY CHECKING
+    @Transactional
+    public String placeOrder(Order order) {
+        double total = 0;
+        List<LineItem> items = order.getItems();
+        for(LineItem item: items) {
+            Product p = getProductById(item.getProduct().getId());
+            if(item.getQty() > p.getQuantity()) {
+                throw  new IllegalArgumentException("Product " + p.getName() + " not is Stock!!!");
+            }
+            item.setAmount(p.getPrice() * item.getQty()); // + GST - DISCOuNT
+            p.setQuantity(p.getQuantity() - item.getQty()); // DIRTY CHECKING
+            total += item.getAmount();
+        }
+        order.setTotal(total);
+        orderRepo.save(order); // save order and its line items [cascade]
+        return  "Order placed!!!";
+    }
+
 
     @Transactional
     public Product updateProductQty(int id) {

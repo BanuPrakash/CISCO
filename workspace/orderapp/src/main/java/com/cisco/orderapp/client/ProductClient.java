@@ -27,7 +27,7 @@ public class ProductClient implements CommandLineRunner {
 //        updatePrice();
 
         System.out.println("Update the product qty");
-        updateQty();
+//        updateQty();
     }
 
     private void updateQty() {
