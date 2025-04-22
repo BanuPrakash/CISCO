@@ -404,7 +404,125 @@ public class EmployeeDaoDbImpl implements EmployeeDao{
 @Service
 public class AppService {
     @Autowired
-    @Qualifier("employeeDaoMongoImpl")
+    @Qualifier("employeeDaoDbImpl")
     private EmployeeDao employeeDao; // wiring is done by spring container
 
 ```
+
+@Profile
+@ConditionalOnMissingBean
+JPA with Hibernate
+
+Recap:
+1) JDBC: Integration library to connect to database. interfaces are provided by java  and implemenation classes are provided by database vendors [oracle / MS/ Postgres /..]
+Connection, DriverManager, Statement, PreparedStatement [ IN parameters]
+
+2) Servlet API for building web based applications.
+3) Servlet engine: Jetty / Tomcat / Netty ...
+4) HttpServlet, HttpServletRequest and HttpServletResponse
+
+Spring Framework and Spring container --> dependency Injection
+Spring Boot
+XML vs Annotation as metadata.
+
+Spring Initializer https://start.spring.io/ for creating a scaffolding code.
+
+If more than one bean is eligible for wiring we get
+
+Field employeeDao in com.example.demo.service.AppService required a single bean, but 2 were found:
+	- employeeDaoDbImpl: 
+	- employeeDaoMongoImpl:
+
+Resolve:
+1) @Primary
+2) @Qualifier
+
+================
+
+Bean: Sun MS gave the definition as a reusable software component. Meaning the object can be used in any enviroment like web, standalone, mobile,...
+
+Bean: from Spring perspective
+any object which is managed by spring container is termed as a bean.
+For example:
+Employee e = new Employee(); // not a bean from Spring perspective
+
+
+Day 2:
+Resolve:
+1) @Primary
+2) @Qualifier
+3) @ConditionalOnMissingBean
+```
+@ConditionalOnMissingBean(EmployeeDaoDbImpl.class)
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+```
+4) @Profile
+```
+@Repository
+@Profile("prod")
+public class EmployeeDaoDbImpl implements EmployeeDao{
+
+@Repository
+@Profile("dev")
+public class EmployeeDaoMongoImpl implements EmployeeDao{
+
+resources/application.properties
+spring.profiles.active=dev
+
+OR use Command Line arguments
+java com.cisco.proj.DemoApplication  --spring.profiles.active=dev
+
+```
+
+Scope of beans:
+1) Singleton [ default ]
+2) Prototype
+3) request [ only for web ]
+4) session [ only for web ]
+5) application [ only for web ]
+
+Singleton: one bean of a type within the container
+```
+@Scope("singleton")
+public class EmployeeDaoDbImpl implements EmployeeDao {
+
+@Service
+public AService {
+    @Autowired
+    EmployeeDao empDao;
+}
+
+@Service
+public BService {
+    @Autowired
+    EmployeeDao empDao;
+}
+```
+
+Prototype: each place we wire, we get a different instance
+```
+@Scope("prototype")
+public class EmployeeDaoDbImpl implements EmployeeDao {
+
+@Service
+public AService {
+    @Autowired
+    EmployeeDao empDao;
+}
+
+@Service
+public BService {
+    @Autowired
+    EmployeeDao empDao;
+}
+```
+
+Factory Methods: object returned from a factory method is managed by Spring container [ bean]
+ @Bean on top the method 
+ 
+Why factory method in Spring?
+* 3rd party APIs provided classes can't have any spring specific annotation
+* Object instantiation is complex
+
+DataSource : pool of database connections, prefer this instead of DriverManager.getConnection() is a single connection
+

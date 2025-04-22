@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AppService {
     @Autowired
-    @Qualifier("employeeDaoMongoImpl")
     private EmployeeDao employeeDao; // wiring is done by spring container
 
     public void insert() {
