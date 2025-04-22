@@ -639,7 +639,28 @@ spring.jpa.hibernate.ddl-auto=validate
 validate ->
 map to existing tables, don't allow create or alter tables
 
+Note:
+any package you create has to be a subpackage of package where main() is present
 
+Example main is in package com.cisco.orderapp;
+valid packages are 
+com.cisco.orderapp.entity;
+com.cisco.orderapp.repo;
+com.cisco.orderapp.service;
+com.cisco.orderapp.a.b.c;
 
+invalid are:
+com.example.repo;
+com.cisco.repo;
 
+====================
 
+With Spring Data JPA we just create interfaces extends JpaRepository,
+Implementation classes i.e @Repository classes are created by Spring Data Jpa
+```
+public interface ProductRepo extends JpaRepository<Product, Integer> {
+}
+
+CRUD operations like save, delete, findAll(), findByID() , ...
+
+```
