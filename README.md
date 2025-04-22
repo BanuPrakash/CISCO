@@ -663,4 +663,12 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
 
 CRUD operations like save, delete, findAll(), findByID() , ...
 
+CommandLineRunner is a simple Spring Boot interface with a run method. Spring Boot will automatically call the run method of all beans implementing this interface after the application context [spring container] has been loaded.
+
+Issue with Lombok:
+Settings -> Compiler -> Annotation Processors
+Enable select
+Obtain processors from classpath select
 ```
+
+update products set qty = 100 where 1 = 1;
