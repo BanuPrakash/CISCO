@@ -556,6 +556,69 @@ Application --> JPA --> ORM --> JDBC --> RDBMS
 
 ===========
 
+Spring Framework:
+
+```
+
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public DataSource getDataSource()  {
+        try {
+            ComboPooledDataSource cpds = new ComboPooledDataSource();
+            cpds.setDriverClass( "com.mysql.cj.jdbc.Driver" ); //loads the jdbc driver
+            cpds.setJdbcUrl( "jdbc:mysql://localhost:3306/AD_JAVA" );
+            cpds.setUser("root");
+            cpds.setPassword("Welcome123");
+            cpds.setMinPoolSize(5);
+            cpds.setAcquireIncrement(5);
+            cpds.setMaxPoolSize(20);
+            return  cpds;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return  null;
+    }
+
+    @Bean
+    public EntityManagerFactory getEmf() {
+        LocalContainerEntityManagerFactory emf = new LocalContainerEntityManagerFactory();
+        emf.setDataSource(getDataSource());
+        emf.setJpaVendor(new HibernateJpaVendor()); // which ORM you want
+        ...
+        return emf;
+    }
+}
+
+
+@Repository
+public class EmployeeDaoJpaImpl implements EmployeeDao{
+    @PersistenceContext
+    EntityManager em;
+      @Override
+    public void addEmployee(Employee e) {
+        em.perist(e);
+    }
+
+    public List<Product> getProducts() {
+        return em.getResultList()...
+    }
+```
+
+Spring Data JPA, makes it easy to easily implement JPA-based (Java Persistence API) repositories.
+
+New Spring project
+dependencies:
+1) data-jpa
+2) mysql
+3) lombok
+
+
+
+
+
+
 
 
 
