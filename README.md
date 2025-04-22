@@ -616,8 +616,28 @@ dependencies:
 
 
 
+Spring boot uses HikariCP as Connection pool like C3p0 ComboPooledDataSource.
+It creates database connection pool based on entries present in application.properties
 
 
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+This is to inform ORM to generate SQL for MySQL database
+
+spring.jpa.hibernate.ddl-auto=update
+DDL --> create / alter / drop
+update --> 
+a) create tables based on mapping if not exist 
+b) if table exists map to existing one
+c) if required alter table [ like add column, change length, ...]
+
+
+spring.jpa.hibernate.ddl-auto=create
+create ->
+drop tables on application termination and create new ones for every start of application
+
+spring.jpa.hibernate.ddl-auto=validate
+validate ->
+map to existing tables, don't allow create or alter tables
 
 
 
