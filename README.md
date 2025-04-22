@@ -519,10 +519,44 @@ public BService {
 
 Factory Methods: object returned from a factory method is managed by Spring container [ bean]
  @Bean on top the method 
- 
+
 Why factory method in Spring?
 * 3rd party APIs provided classes can't have any spring specific annotation
 * Object instantiation is complex
 
 DataSource : pool of database connections, prefer this instead of DriverManager.getConnection() is a single connection
+
+
+===============================
+
+ORM: Object Relational Mapping
+ORM, or object-relational mapping, is a programming method used to bridge the gap between object-oriented programming languages (like Python, Java, Ruby, C++, JavaScript, C#, and many more) and relational databases (like PostgreSQL, MySQL, or SQLite). Simply put, ORM allows developers to manipulate data using Java or Python instead of SQL statements.
+
+ORM simplifies CRUD operations for RDBMS.
+
+Mapping
+class <--> table
+instance variables <---> columns of table
+
+@Id --> is to mark a Primary Key
+
+ORM generates SQLs
+
+ORM frameworks available for Java Developers:
+1) Hibernate --> JBoss --> RedHat
+2) TopLink --> Oracle
+3) KODO --> BEA --> Oracle
+4) JDO --> Sun Microsystems --> Oracle
+5) EclipseLink --> Eclipse
+6) OpenJPA --> Apache
+
+JPA --> Java Persistence API a specification for ORMs
+
+Application --> JPA --> ORM --> JDBC --> RDBMS
+
+===========
+
+
+
+
 
