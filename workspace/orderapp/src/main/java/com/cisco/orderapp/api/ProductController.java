@@ -4,6 +4,7 @@ package com.cisco.orderapp.api;
 import com.cisco.orderapp.entity.Product;
 import com.cisco.orderapp.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +18,19 @@ public class ProductController {
 
     // GET
     // http://localhost:8080/api/products
+    // http://localhost:8080/api/products?page=1&size=2
     // http://localhost:8080/api/products?low=5000&high=25000 Query Parameters ?
     // accept: application/json
 
     @GetMapping()
     public List<Product> getProducts(@RequestParam(value = "low", defaultValue = "0.0") double low,
-                                     @RequestParam(value = "high", defaultValue = "0.0") double high) {
-       if(low == 0.0 && high == 0.0) {
+                                     @RequestParam(value = "high", defaultValue = "0.0") double high,
+        @RequestParam(value="size", defaultValue="0") int size,
+                                     @RequestParam(value="page", defaultValue="0") int page
+        ) {
+        if(size != 0 ) {
+            return orderService.getProductsByPage(PageRequest.of(page, size)).toList();
+        } else if(low == 0.0 && high == 0.0) {
            return orderService.getProducts();
        }
        return  orderService.getByRange(low, high);

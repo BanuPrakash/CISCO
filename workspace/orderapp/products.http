@@ -6,6 +6,10 @@ Accept: application/json
 GET http://localhost:8080/api/products?low=500&high=25000
 Accept: application/json
 
+### @name="Pagination"
+GET http://localhost:8080/api/products?page=2&size=2
+Accept: application/json
+
 
 ### @name="get products by ID"
 GET http://localhost:8080/api/products/3

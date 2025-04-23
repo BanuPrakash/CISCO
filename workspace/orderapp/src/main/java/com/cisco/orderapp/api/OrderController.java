@@ -21,7 +21,7 @@ public class OrderController {
     // GET http://localhost:8080/api/orders?orderDate=2025-04-23
 
     @GetMapping()
-    public List<Order> getOrders(@RequestParam(value = "orderDate", defaultValue = "null")
+    public List<Order> getOrders(@RequestParam(value = "orderDate", required = false)
                                      @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         if(date == null) {
             return orderService.getOrders();

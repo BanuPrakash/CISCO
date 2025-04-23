@@ -11,6 +11,8 @@ import com.cisco.orderapp.repo.ProductRepo;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -89,6 +91,11 @@ public class OrderService {
     public List<Product> getProducts() {
         return  productRepo.findAll();
     }
+
+    public Page<Product> getProductsByPage(Pageable pageable) {
+        return  productRepo.findAll(pageable);
+    }
+
 
     public Product getProductById(int id) {
         Optional<Product> opt =  productRepo.findById(id);
