@@ -1,5 +1,6 @@
 package com.cisco.orderapp.service;
 
+import com.cisco.orderapp.dto.ReportDTO;
 import com.cisco.orderapp.entity.Customer;
 import com.cisco.orderapp.entity.LineItem;
 import com.cisco.orderapp.entity.Order;
@@ -57,6 +58,10 @@ public class OrderService {
 
     public List<Order> getOrders() {
         return orderRepo.findAll();
+    }
+
+    public List<ReportDTO> getReport() {
+        return orderRepo.getReport();
     }
 
     @Transactional
