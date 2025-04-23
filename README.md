@@ -968,4 +968,13 @@ public void log(args) {
     log.info(...)
 }
 
+Try to simulate @Transactional
 
+===
+Aspects are not web aware. No access to HttpServletRequest and HttpServletResponse and hence they can't write data back to client
+
+Spring Web MVC provides @ControllerAdvice a special advice to catch exceptions propageted from @Controller and @RestController and write custom message to client
+@ControllerAdvice is a specialized annotation  that enables global exception handling across your entire Spring MVC application.
+
+
+BindingResult is an interface in Spring that holds the result of a validation process. It contains any errors that may have occurred during the validation and binding of request parameters to an object. It is typically used in conjunction with the @Valid annotation to validate request data.

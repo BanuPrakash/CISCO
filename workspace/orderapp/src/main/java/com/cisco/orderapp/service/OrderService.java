@@ -1,5 +1,6 @@
 package com.cisco.orderapp.service;
 
+import com.cisco.orderapp.aspects.Tx;
 import com.cisco.orderapp.dto.ReportDTO;
 import com.cisco.orderapp.entity.Customer;
 import com.cisco.orderapp.entity.LineItem;
@@ -84,10 +85,12 @@ public class OrderService {
         return  getProductById(id);
     }
 
+    @Tx
     public  List<Product> getByRange(double low, double high) {
         return productRepo.findByRange(low, high);
     }
 
+    @Tx
     public List<Product> getProducts() {
         return  productRepo.findAll();
     }

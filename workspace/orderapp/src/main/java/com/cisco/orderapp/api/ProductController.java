@@ -73,6 +73,11 @@ public class ProductController {
         return orderService.updateProduct(id, price);
     }
 
+//    @PutMapping ("/{id}")
+//    public Product updateCompleteProduct(@PathVariable("id") int id, @RequestBody Product p) throws EntityNotFoundException {
+////        return orderService.updateProduct(id, price);
+//    }
+
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable("id") int id) {
         return "Operation Not supported!!!";
