@@ -17,10 +17,24 @@ public class ProductController {
 
     // GET
     // http://localhost:8080/api/products
+    // http://localhost:8080/api/products?low=5000&high=25000 Query Parameters ?
     // accept: application/json
+
     @GetMapping()
-    public List<Product> getProducts() {
-       return  orderService.getProducts();
+    public List<Product> getProducts(@RequestParam(value = "low", defaultValue = "0.0") double low,
+                                     @RequestParam(value = "high", defaultValue = "0.0") double high) {
+       if(low == 0.0 && high == 0.0) {
+           return orderService.getProducts();
+       }
+       return  orderService.getByRange(low, high);
+    }
+
+    // GET
+    // http://localhost:8080/api/products/4 Path Parameter
+    // accept: application/json
+    @GetMapping("/{pid}")
+    public Product getProductById(@PathVariable("pid") int id) {
+        return  orderService.getProductById(id);
     }
 
     // POST
@@ -39,5 +53,19 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED) // 201
     public  Product addProduct(@RequestBody Product p) {
         return  orderService.saveProduct(p);
+    }
+
+    // PATCH
+    // http://localhost:8080/api/products/3?price=52000
+    // Accept: application/json
+
+    @PatchMapping ("/{id}")
+    public Product updateProduct(@PathVariable("id") int id, @RequestParam("price") double price) {
+        return orderService.updateProduct(id, price);
+    }
+    
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable("id") int id) {
+        return "Operation Not supported!!!";
     }
 }

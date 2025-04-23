@@ -871,6 +871,12 @@ POSTMAN
 https://www.postman.com/downloads/
 
 
+Controller are for Traditional web application which returns Pages like HTML / PDF
+RestController is for RESTful WS to return various formats of representation like JSON / XML
 
+Plural Nouns to identify a resource [ products, orders, customers, ...]
+@GetMapping() @PostMapping() @DeleteMapping() @PutMapping() , @PatchMapping() 
+
+Put is for major update, Patch is for partial updates
 
 
