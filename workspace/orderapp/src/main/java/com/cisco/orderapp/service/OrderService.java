@@ -55,6 +55,9 @@ public class OrderService {
         return  "Order placed!!!";
     }
 
+    public List<Order> getOrders() {
+        return orderRepo.findAll();
+    }
 
     @Transactional
     public Product updateProductQty(int id) {
