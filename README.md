@@ -978,3 +978,19 @@ Spring Web MVC provides @ControllerAdvice a special advice to catch exceptions p
 
 
 BindingResult is an interface in Spring that holds the result of a validation process. It contains any errors that may have occurred during the validation and binding of request parameters to an object. It is typically used in conjunction with the @Valid annotation to validate request data.
+
+==============
+
+Spring APIs for Consuming RESTful WS:
+1) RestTemplate
+2) WebClient
+3) RestClient
+
+Day 4:
+Unit Testing
+Cache
+HATEOAS
+Actutator
+Spring DOC
+Async operation
+

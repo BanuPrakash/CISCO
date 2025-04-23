@@ -3,6 +3,7 @@ package com.cisco.orderapp.api;
 import com.cisco.orderapp.service.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,6 +32,10 @@ public class GlobalExceptionHandler {
         List<String> errors = ex.getBindingResult().getFieldErrors()
                 .stream().map(exception -> exception.getDefaultMessage())
                 .collect(Collectors.toList());
+//        Map<String,List<FieldError>> errors = ex.getBindingResult().getFieldErrors()
+//                .stream()
+//                .collect(Collectors.groupingBy(exception -> exception.getField()));
+
         body.put("errors", errors);
         body.put("timestamp", new Date());
 
