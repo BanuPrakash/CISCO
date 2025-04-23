@@ -986,6 +986,35 @@ Spring APIs for Consuming RESTful WS:
 2) WebClient
 3) RestClient
 
+Problem Statement:
+```
+Vehicle
+REG_NO | type | cost_per_day
+
+DRIVER
+ID | NAME | PHONE
+
+CUSTOMER
+EMAIL | FNAME | LNAME
+
+
+RENTAL
+ID | RENT_FROM_DATE | RATE_TO_DATE | CUSTOMER_FK | VECHICLE_FK | DRIVER_FK
+
+1) Add Vehicle
+2) Add Driver
+3) Add Customer
+4) RENT a vehicle
+ID | RENT_FROM_DATE | RATE_TO_DATE | CUSTOMER_FK        | VECHICLE_FK | DRIVER_FK
+124  2025-4-20          NULL         raj@cisco.com          KA12EF141    789
+
+5) RETURN A vehcile --> 124
+
+ID | RENT_FROM_DATE | RATE_TO_DATE | CUSTOMER_FK        | VECHICLE_FK | DRIVER_FK
+124  2025-4-20          2025-4-23         raj@cisco.com          KA12EF141    789
+
+```
+
 Day 4:
 Unit Testing
 Cache
@@ -993,4 +1022,6 @@ HATEOAS
 Actutator
 Spring DOC
 Async operation
+Security
+
 
