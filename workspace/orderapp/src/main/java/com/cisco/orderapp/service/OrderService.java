@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +55,10 @@ public class OrderService {
         order.setTotal(total);
         orderRepo.save(order); // save order and its line items [cascade]
         return  "Order placed!!!";
+    }
+
+    public List<Order> byDate(Date date) {
+        return orderRepo.getByDate(date);
     }
 
     public List<Order> getOrders() {

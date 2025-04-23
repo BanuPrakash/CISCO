@@ -63,7 +63,7 @@ public class ProductController {
     public Product updateProduct(@PathVariable("id") int id, @RequestParam("price") double price) {
         return orderService.updateProduct(id, price);
     }
-    
+
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable("id") int id) {
         return "Operation Not supported!!!";
