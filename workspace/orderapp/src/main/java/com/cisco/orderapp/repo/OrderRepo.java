@@ -21,4 +21,6 @@ public interface OrderRepo extends JpaRepository<Order, Integer> {
 
     @Query("select new com.cisco.orderapp.dto.ReportDTO(c.firstName, c.email, o.orderDate, o.total) from Order o inner join o.customer c")
     List<ReportDTO> getReport();
+
+    // get order by date -- pending
 }

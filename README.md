@@ -817,5 +817,58 @@ Spring Data JPA module when configured in Spring Boot Framework provides followi
 
 Day 3
 
+Building RESTful WS
+
+Spring Web MVC Module provides
+* DispatcherServlet: intercepts all http requests from client [ url-pattern = * ]
+* HandlerMapping : mapping a URL to @Controller or @RestController 
+* Jackson library for Java <---> JSON
+* Tomcat is configured as default servlet engine
+
+method.invoke();
+
+JAXB / XML libraries should be explicitly configured for Java <--> XML
+
+Alternates to Jackson: GSON, Jettison, moxy
+
+```
+    @RestController
+    @RequestMapping("api/products")
+    public class ProductController {
+        private final OrderService orderService;
+        @GetMapping() 
+        public List<Product> getProducts() {
+            return orderService.getProducts();
+        }
+
+        @PostMapping()
+        public Product addProduct(@RequestBody Product p) {
+            return orderService.addProduct(p);
+        }
+    }
+
+```
+
+REST --> REpresentational State Transfer -- architectural style for distributed hypermedia system.
+
+Resource: any info on server which can be named like document, printer, database...
+
+Representation: state of the resource at given time
+
+We can serve the representation in various formats like JSON / XML
+
+Advantage of using RESTful over traditional web application is we can have different clients consuming the data like tv / mobile / web / desktop
+
+Guiding Principles of REST:
+1) Uniform Interface: uniquely identify each resource and used for interaction between client and server
+2) Client-server: seperation of concerns, helps client and server to evolve independently.
+3) Stateless: There should not be a conversational state like session tracking
+4) Cacheable : Client side / Middleware / Serverside cache
+5) Layered system
+
+
+POSTMAN
+https://www.postman.com/downloads/
+
 
 
