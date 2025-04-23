@@ -887,6 +887,8 @@ Validation:
             <artifactId>spring-boot-starter-validation</artifactId>
  </dependency>
 
+Settings --> Compiler --> Project --> Update Annotation Processor
+
 public  Product addProduct(@RequestBody @Valid  Product p) {
         return  orderService.saveProduct(p);
     }
@@ -909,4 +911,61 @@ default message [name]]; default message [Name is required!!!]]
 
 [Field error in object 'product' on field 'price': rejected value [0.0]; codes [Min.product.price,Min.price,Min.double,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [product.price,price]; arguments []; default message [price],10]; 
 default message [Price 0.0 should be more than 10]] ]
+
+==============
+
+
+AOP: Aspect Oriented Programming.
+AOP is needed to eliminate Code tangling and code scattering
+
+```
+    public Account createAccount(Account fromAcc) {
+        if(getRole().equals("ADMIN")) { // SECURITY
+            log.info("trying to create an account");
+            // actual code to create account
+            log.info("account created!!!");
+            return fromAcc;
+        }
+    }
+
+    public void tranferFunds(Account fromAcc, Account toAcc, double amt) {
+        log.info("begin transferFunds..");
+       Transaction tx = con.beginTransaction();
+        try {
+            double bal = fromAcc.getBalance();
+            if(amt > bal) {
+                log.info("insufficient balance!!!";)
+            }
+            fromAcc.withdraw(...)
+            ...
+
+            tx.commit();
+        } catch(Exception ex) {
+            tx.rollback();
+        }
+
+
+       
+
+    }
+
+```
+
+Aspect: a bit of code which is not a main logic but can be used along with main logic:
+Logging, Security, Transaction, Profile, ...
+
+JoinPoint: where aspect can be weaved, eligibility --> Spring method and exception are JoinPoint
+PointCut: Where an aspect is weaved
+Advice: how to weave it. Before, After, Around, AfterReturning, AfterThrowing
+
+throws EntityNotFoundException
+
+PointCut:
+m1, m4 and EntityNotFoundException
+
+
+public void log(args) {
+    log.info(...)
+}
+
 

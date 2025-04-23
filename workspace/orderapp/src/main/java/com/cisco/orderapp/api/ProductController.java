@@ -2,6 +2,7 @@ package com.cisco.orderapp.api;
 
 
 import com.cisco.orderapp.entity.Product;
+import com.cisco.orderapp.service.EntityNotFoundException;
 import com.cisco.orderapp.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,7 @@ public class ProductController {
     // http://localhost:8080/api/products/4 Path Parameter
     // accept: application/json
     @GetMapping("/{pid}")
-    public Product getProductById(@PathVariable("pid") int id) {
+    public Product getProductById(@PathVariable("pid") int id) throws EntityNotFoundException {
         return  orderService.getProductById(id);
     }
 
@@ -68,7 +69,7 @@ public class ProductController {
     // Accept: application/json
 
     @PatchMapping ("/{id}")
-    public Product updateProduct(@PathVariable("id") int id, @RequestParam("price") double price) {
+    public Product updateProduct(@PathVariable("id") int id, @RequestParam("price") double price) throws EntityNotFoundException {
         return orderService.updateProduct(id, price);
     }
 

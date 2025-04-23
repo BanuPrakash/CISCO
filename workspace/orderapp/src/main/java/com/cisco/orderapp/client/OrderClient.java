@@ -5,6 +5,7 @@ import com.cisco.orderapp.entity.Customer;
 import com.cisco.orderapp.entity.LineItem;
 import com.cisco.orderapp.entity.Order;
 import com.cisco.orderapp.entity.Product;
+import com.cisco.orderapp.service.EntityNotFoundException;
 import com.cisco.orderapp.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -45,7 +46,7 @@ public class OrderClient implements CommandLineRunner {
         }
     }
 
-    private void newOrder() {
+    private void newOrder() throws EntityNotFoundException  {
         Customer customer = new Customer();
         customer.setEmail("angelina@cisco.com");
 

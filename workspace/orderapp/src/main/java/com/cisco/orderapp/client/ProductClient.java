@@ -1,6 +1,7 @@
 package com.cisco.orderapp.client;
 
 import com.cisco.orderapp.entity.Product;
+import com.cisco.orderapp.service.EntityNotFoundException;
 import com.cisco.orderapp.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -28,12 +29,12 @@ public class ProductClient implements CommandLineRunner {
 //        updateQty();
     }
 
-    private void updateQty() {
+    private void updateQty() throws EntityNotFoundException {
         Product p = orderService.updateProductQty(3); // buy one LG AC
         System.out.println(p);
     }
 
-    private void updatePrice() {
+    private void updatePrice() throws EntityNotFoundException {
         Product p = orderService.updateProduct(2, 8900.50);
         System.out.println(p);
     }
@@ -45,7 +46,7 @@ public class ProductClient implements CommandLineRunner {
         }
     }
 
-    private void getProductById() {
+    private void getProductById() throws EntityNotFoundException {
         Product p = orderService.getProductById(1);
         System.out.println(p);
     }

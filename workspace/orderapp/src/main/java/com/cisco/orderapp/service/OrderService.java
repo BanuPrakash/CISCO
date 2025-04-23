@@ -42,7 +42,7 @@ public class OrderService {
     // any exception rollback entire thing
     // Transactional is also used here for DIRTY CHECKING
     @Transactional
-    public String placeOrder(Order order) {
+    public String placeOrder(Order order) throws  EntityNotFoundException{
         double total = 0;
         List<LineItem> items = order.getItems();
         for(LineItem item: items) {
@@ -72,14 +72,14 @@ public class OrderService {
     }
 
     @Transactional
-    public Product updateProductQty(int id) {
+    public Product updateProductQty(int id) throws  EntityNotFoundException{
         Product p = getProductById(id); // fetch from database
         p.setQuantity(p.getQuantity() - 1); // product became dirty --> UPDATE SQL is issued by ORM
         return  p;
     }
 
     @Transactional
-    public Product updateProduct(int id, double price) {
+    public Product updateProduct(int id, double price) throws  EntityNotFoundException{
         productRepo.updatePrice(id, price);
         return  getProductById(id);
     }
@@ -97,12 +97,12 @@ public class OrderService {
     }
 
 
-    public Product getProductById(int id) {
+    public Product getProductById(int id) throws  EntityNotFoundException {
         Optional<Product> opt =  productRepo.findById(id);
         if(opt.isPresent()) {
             return  opt.get();
         }
-        throw  new RuntimeException("Product with id " + id + " doesn't exist!!");
+        throw  new EntityNotFoundException("Product with id " + id + " doesn't exist!!");
     }
 
     public Product saveProduct(Product p) {
