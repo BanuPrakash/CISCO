@@ -879,4 +879,34 @@ Plural Nouns to identify a resource [ products, orders, customers, ...]
 
 Put is for major update, Patch is for partial updates
 
+Validation:
+
+```
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+ </dependency>
+
+public  Product addProduct(@RequestBody @Valid  Product p) {
+        return  orderService.saveProduct(p);
+    }
+
+Product.java
+    @NotBlank(message = "Name is required!!!")
+    private  String name;
+
+    @Min(value=10, message = "Price ${validatedValue} should be more than {value}")
+    private  double price;
+
+    
+    @Column(name="qty")
+    @Min(value=0, message = "Quantity ${validatedValue} should be more than {value}")
+    private int quantity;
+```
+
+.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public com.cisco.orderapp.entity.Product com.cisco.orderapp.api.ProductController.addProduct(com.cisco.orderapp.entity.Product) with 2 errors: [Field error in object 'product' on field 'name': rejected value [null]; codes [NotBlank.product.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [product.name,name]; arguments []; 
+default message [name]]; default message [Name is required!!!]] 
+
+[Field error in object 'product' on field 'price': rejected value [0.0]; codes [Min.product.price,Min.price,Min.double,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [product.price,price]; arguments []; default message [price],10]; 
+default message [Price 0.0 should be more than 10]] ]
 

@@ -3,6 +3,7 @@ package com.cisco.orderapp.api;
 
 import com.cisco.orderapp.entity.Product;
 import com.cisco.orderapp.service.OrderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -58,7 +59,7 @@ public class ProductController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED) // 201
-    public  Product addProduct(@RequestBody Product p) {
+    public  Product addProduct(@RequestBody @Valid  Product p) {
         return  orderService.saveProduct(p);
     }
 
