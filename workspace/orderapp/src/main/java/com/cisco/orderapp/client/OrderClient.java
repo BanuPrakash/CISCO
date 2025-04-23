@@ -21,7 +21,7 @@ public class OrderClient implements CommandLineRunner {
     public void run(String... args) throws Exception {
        // newOrder();
 //        printOrders();
-        printReport();
+//        printReport();
     }
 
     private void printReport() {

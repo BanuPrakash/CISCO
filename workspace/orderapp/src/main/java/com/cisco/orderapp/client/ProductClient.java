@@ -17,16 +17,14 @@ public class ProductClient implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 //        printProducts();
-        System.out.println("****");
 //        getProductById();
-        System.out.println("****");
-        System.out.println("Get Products By Range!!!");
+//        System.out.println("Get Products By Range!!!");
 //        printByRange();
 
-        System.out.println("Update the product price");
+//        System.out.println("Update the product price");
 //        updatePrice();
 
-        System.out.println("Update the product qty");
+//        System.out.println("Update the product qty");
 //        updateQty();
     }
 

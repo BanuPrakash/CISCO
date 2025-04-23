@@ -1,0 +1,16 @@
+### @name="get all products"
+GET http://localhost:8080/api/products
+Accept: application/json
+
+### @name ="add a new product"
+
+POST http://localhost:8080/api/products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "iPhone 16e",
+  "price": 78000,
+  "quantity": 100
+}
+
