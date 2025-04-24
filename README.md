@@ -1016,12 +1016,54 @@ ID | RENT_FROM_DATE | RATE_TO_DATE | CUSTOMER_FK        | VECHICLE_FK | DRIVER_F
 ```
 
 Day 4:
-Unit Testing
-Cache
-HATEOAS
-Actutator
-Spring DOC
-Async operation
-Security
+
+Recap:
+* Different RESTful API mapping
+@GetMapping(), @PostMapping(), @PutMapping(), @PatchMapping(), @DeleteMapping()
+@RequestBody --> Payload to Java Object based on Content-type
+@ResponseBody --> Java to Payload based on Accept [ optional]
+@RequestParam --> to read query parameters ?
+@PathVariable --> path parameter /data
+ResponseEntity --> ResponseBody + additional info like explict headers
+
+* AOP
+Aspect, JoinPoint , PointCut, Advice
+@ControllerAdvice --> Spring MVC provides this advice which works like AfterThrowing advice to catch any exceptions propagated from @Controller or @RestController
+
+* Validation module 
+@Valid, NotBlank, Min, Max, Email, Pattern, ...
+MethodArgumentNotValidException
+https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/package-summary
+
+==============
+
+Unit Testing:
+```
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+```
+
+Unit testing has to be done by a developer.
+
+When there is a dependency, dependency has to be mocked
+
+Controller --> Service --> Repository --> database
+
+We will test Controller by mocking Service tier code.
+
+Spring Boot provides:
+1) JUnit -Jupiter as default Unit testing Framework [TestNG alternate]
+2) Mockito for mocking dependencies [ EasyMock / JMock ...]
+3) Hamcrest [ assertions which can be used along with default assertions comming from JUnit] good for collections. https://hamcrest.org/JavaHamcrest/tutorial
+4) JsonPath https://jsonpath.com/
+ 
+ @WebMvcTest : Annotation that can be used for a Spring MVC test that focuses only on Spring MVC components.
+ This annotation doesn't create a complete Spring container but loads only helpers for MVC like HandlerMapping, Jackson, MockMvc.
+ Here Service / Repository / Database are not loaded
 
 
+MockMvc is used to make API calls for testing -- GET / POST / ...

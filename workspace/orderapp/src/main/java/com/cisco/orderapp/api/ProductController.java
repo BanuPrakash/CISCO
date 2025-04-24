@@ -60,7 +60,7 @@ public class ProductController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED) // 201
-    public  Product addProduct(@RequestBody @Valid  Product p) {
+    public @ResponseBody Product addProduct(@RequestBody @Valid  Product p) {
         return  orderService.saveProduct(p);
     }
 
