@@ -1243,4 +1243,10 @@ dischargePatient can generate an ApplicationEvent. BillingService, NotificationS
 @EnableAsync ==> allows application code to execute in multiple threads [ not Tomcat Threads]
 Allows use to use our own Thread pool
 
+Threads Priority ==> 1, 10
+By default Thread priorty is 5
+
+Thread t1 = new Thread(Runnable object);
+t1.setPriority(8);
+
 
