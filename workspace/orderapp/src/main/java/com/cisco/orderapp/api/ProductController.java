@@ -6,6 +6,9 @@ import com.cisco.orderapp.service.EntityNotFoundException;
 import com.cisco.orderapp.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +64,7 @@ public class ProductController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED) // 201
+    @Cacheable(value = "productCache", key = "#p.id", condition = "#p.quantity > 10")
     public @ResponseBody Product addProduct(@RequestBody @Valid  Product p) {
         return  orderService.saveProduct(p);
     }
@@ -70,6 +74,7 @@ public class ProductController {
     // Accept: application/json
 
     @PatchMapping ("/{id}")
+    @CachePut(value = "productCache", key = "#id")
     public Product updateProduct(@PathVariable("id") int id, @RequestParam("price") double price) throws EntityNotFoundException {
         return orderService.updateProduct(id, price);
     }
@@ -80,6 +85,7 @@ public class ProductController {
 //    }
 
     @DeleteMapping("/{id}")
+    @CacheEvict(value = "productCache", key = "#id")
     public String deleteProduct(@PathVariable("id") int id) {
         return "Operation Not supported!!!";
     }
@@ -88,5 +94,18 @@ public class ProductController {
     public ResponseEntity<Product> getProductByIdAndEtag(@PathVariable("pid") int id) throws EntityNotFoundException {
         Product p = orderService.getProductById(id);
         return  ResponseEntity.ok().eTag(Long.toString(p.hashCode())).body(p);
+    }
+
+    @GetMapping("/cache/{pid}")
+    @Cacheable(value = "productCache", key = "#id", unless = "#result != null")
+    public Product getProductByCacheId(@PathVariable("pid") int id) throws EntityNotFoundException {
+        System.out.println("Cache Miss!!!");
+        // simulate delay
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return  orderService.getProductById(id);
     }
 }

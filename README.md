@@ -1125,3 +1125,26 @@ With Version:
 ```
 server side caching:
 
+Including dependency we get a default ConcurrentHashMapCache Manager.
+In case if we include explict cache managers like Redis, this will be disabled
+
+```
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+</dependency>
+
+@Configuration
+@EnableCaching
+public class AppConfig {
+
+
+ @Cacheable ==> add entry in Cache
+ @CachePut --> update the cache
+ @CacheEvict --> remove from cache
+
+https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions
+
+```
+
+SPeL ==> Spring Expression Language
