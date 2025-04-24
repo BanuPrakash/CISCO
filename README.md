@@ -1249,4 +1249,6 @@ By default Thread priorty is 5
 Thread t1 = new Thread(Runnable object);
 t1.setPriority(8);
 
+Declarative Definition: With @HttpExchange, you define your HTTP client as an interface, annotating methods with HTTP methods and paths.
+
 

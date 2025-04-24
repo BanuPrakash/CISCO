@@ -38,6 +38,16 @@ public class LogAspect {
         return obj;
     }
 
+    @Around("execution(* com.cisco.orderapp.api.PostController.*(..))")
+    public Object doProfileController(ProceedingJoinPoint pjp) throws Throwable {
+        long startTime = new Date().getTime();
+        Object obj = pjp.proceed(); // invoke the actual method
+        long endTime = new Date().getTime();
+        log.info("Time taken to execute " + pjp.getSignature().getName() + " is : " + (endTime - startTime) + " ms");
+        return obj;
+    }
+
+
     @AfterThrowing(value = "execution(* com.cisco.orderapp.service.*.*(..))", throwing = "ex")
     public void handleException(EntityNotFoundException ex) {
         log.info("Exception :" + ex.getMessage());

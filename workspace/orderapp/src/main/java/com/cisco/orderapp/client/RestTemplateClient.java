@@ -9,14 +9,17 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 @RequiredArgsConstructor
-public class RestClient implements CommandLineRunner {
+public class RestTemplateClient implements CommandLineRunner {
     private final RestTemplate template;
-    record ProductPOJO(int id, String title, double price, String image) {}
+
+    record ProductPOJO(int id, String title, double price, String image) {
+    }
+
     @Override
     public void run(String... args) throws Exception {
         getProductsFromApi();
         getProductById();
-     //   addProductUsingRestTemplate();
+        //   addProductUsingRestTemplate();
     }
 
     private void addProductUsingRestTemplate() {
@@ -27,8 +30,8 @@ public class RestClient implements CommandLineRunner {
     }
 
     private void getProductById() {
-       ResponseEntity<ProductPOJO> responseEntity =
-               template.getForEntity("https://fakestoreapi.com/products/1", ProductPOJO.class);
+        ResponseEntity<ProductPOJO> responseEntity =
+                template.getForEntity("https://fakestoreapi.com/products/1", ProductPOJO.class);
 
         System.out.println(responseEntity.getStatusCode()); // 200
         System.out.println(responseEntity.getBody());
