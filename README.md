@@ -1146,5 +1146,19 @@ public class AppConfig {
 https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions
 
 ```
-
 SPeL ==> Spring Expression Language
+
+Redis as Cache Manager:
+Redis on Docker.
+```
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+ </dependency>
+
+application.properties
+spring.data.redis.host=localhost
+spring.data.redis.port=6379
+
+```
+

@@ -97,7 +97,7 @@ public class ProductController {
     }
 
     @GetMapping("/cache/{pid}")
-    @Cacheable(value = "productCache", key = "#id", unless = "#result != null")
+    @Cacheable(value = "productCache", key = "#id", unless = "#result == null")
     public Product getProductByCacheId(@PathVariable("pid") int id) throws EntityNotFoundException {
         System.out.println("Cache Miss!!!");
         // simulate delay

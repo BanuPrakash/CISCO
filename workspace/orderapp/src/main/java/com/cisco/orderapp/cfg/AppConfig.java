@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 public class AppConfig {
     @Autowired
     CacheManager cacheManager;
-    
+
 
     @Scheduled(cron = "0 0/30 * * * *")
 //    @Scheduled(fixedRate = 1000)
