@@ -10,11 +10,14 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -79,15 +82,31 @@ public class ProductController {
         return orderService.updateProduct(id, price);
     }
 
+    @PutMapping ("/{id}")
+    @CachePut(value = "productCache", key = "#id")
+    public Product updateProductPut(@PathVariable("id") int id, @RequestBody Product p) throws EntityNotFoundException {
+        return orderService.updateProduct(id, p.getPrice());
+    }
+
 //    @PutMapping ("/{id}")
 //    public Product updateCompleteProduct(@PathVariable("id") int id, @RequestBody Product p) throws EntityNotFoundException {
 ////        return orderService.updateProduct(id, price);
 //    }
+    private class StringWrapper {
+        private String str;
+        public StringWrapper(String str) {
+            this.str = str;
+        }
 
+    @Override
+    public String toString() {
+        return str;
+    }
+}
     @DeleteMapping("/{id}")
     @CacheEvict(value = "productCache", key = "#id")
-    public String deleteProduct(@PathVariable("id") int id) {
-        return "Operation Not supported!!!";
+    public StringWrapper deleteProduct(@PathVariable("id") int id) {
+        return new StringWrapper("Operation Not supported!!!");
     }
 
     @GetMapping("/etag/{pid}")
@@ -107,5 +126,20 @@ public class ProductController {
             throw new RuntimeException(e);
         }
         return  orderService.getProductById(id);
+    }
+
+
+    // HATEOAS
+    @GetMapping("/hateoas/{pid}")
+    public EntityModel<Product> getProductHateosById(@PathVariable("pid") int id) throws EntityNotFoundException {
+        Product p =  orderService.getProductById(id);
+        EntityModel<Product> entityModel = EntityModel.of(p ,
+                linkTo(methodOn(ProductController.class).getProductHateosById(id)).withSelfRel()
+                        .andAffordance(afford(methodOn(ProductController.class).updateProductPut(id, null)))
+                        .andAffordance(afford(methodOn(ProductController.class).deleteProduct(id))),
+                linkTo(methodOn(ProductController.class).getProducts(0,0, 0, 0)).withRel("products")
+                );
+
+        return entityModel;
     }
 }

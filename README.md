@@ -1161,4 +1161,34 @@ spring.data.redis.host=localhost
 spring.data.redis.port=6379
 
 ```
+Level 3 : RESTful WS
+HATEOAS (Hypertext As The Engine Of Application State)
+https://martinfowler.com/articles/richardsonMaturityModel.html
+
+```
+GET /doctors/mjones/slots?date=20100104&status=open
+
+<openSlotList>
+  <slot id = "1234" doctor = "mjones" start = "1400" end = "1450">
+     <link rel = "/linkrels/slot/book" 
+           uri = "/slots/1234"/>
+  </slot>
+  <slot id = "5678" doctor = "mjones" start = "1600" end = "1650">
+     <link rel = "/linkrels/slot/book" 
+           uri = "/slots/5678"/>
+  </slot>
+</openSlotList>
+
+```
+
+Spring Boot HATEOAS:
+```
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+ </dependency>
+ EntityModel --> Resource/Entity + Links EntityModel<Product>
+CollectionModel --> List<Entity> + Links CollectionModel<List<Product>>
+WebMvcLinkBuilder --> programetically add links
+```
 
