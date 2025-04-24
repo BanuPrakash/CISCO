@@ -1190,5 +1190,57 @@ Spring Boot HATEOAS:
  EntityModel --> Resource/Entity + Links EntityModel<Product>
 CollectionModel --> List<Entity> + Links CollectionModel<List<Product>>
 WebMvcLinkBuilder --> programetically add links
+
+HAL [ links ] and HAL_FORMS [affordance -- template]
 ```
+
+Spring Data REST is part of the umbrella Spring Data project [data-jpa data-mongo] and makes it easy to build hypermedia-driven REST web services on top of Spring Data repositories [JpaRepositry, MongoRepository].
+
+Using Spring Data Rest we don't need to write @RestController
+Spring Data Rest doesn't support @RestController instead use BasePathAwareController for adding extra endpoints or over write existing endpoints 
+
+
+Good for basic Inventory type applications without any business logic [Simple CRUD]
+
+New Spring boot application
+* lombok
+* mysql
+* web
+* data-jpa
+* data-rest [ Rest respositories]
+
+http://localhost:8080/products/search/findByPriceBetween?low=10&high=50000
+http://localhost:8080/products/search/findByQuantity?quantity=100
+
+
+==================================
+
+Spring Application Events and Async operations.
+
+
+// Synchrounous Code --> Sequential Execution
+```
+POST http://localhost:8080/api/discharge
+Content-type: application/json
+
+{
+    "patientId": "1234",
+    "patientName": " George"
+}
+
+
+// tight coupling
+public String dischargePatient(String patientId, String patientName) {
+    billingService.processBill(patientId); // blocking
+    medicalRecordsService.updatePatientHistory(patientId); // blocking
+    houseKeepingService.notifyPatientDischarge(); // blocking
+    notificationService.notifyPatient(); // blocking
+    return "..";
+}
+```
+dischargePatient can generate an ApplicationEvent. BillingService, NotificationService, ... can be ApplicationEventListener
+
+@EnableAsync ==> allows application code to execute in multiple threads [ not Tomcat Threads]
+Allows use to use our own Thread pool
+
 

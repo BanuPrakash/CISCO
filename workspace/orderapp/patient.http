@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/patient/discharge
+Content-type: application/json
+
+{
+  "patientId": "1234",
+  "patientName": " George"
+}
