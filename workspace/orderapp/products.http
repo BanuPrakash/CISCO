@@ -41,3 +41,15 @@ Content-Type: application/json
 {
 
 }
+
+
+### @name="ETAG"
+GET http://localhost:8080/api/products/etag/2
+Accept: application/json
+
+
+### @name="Send ETAG"
+GET http://localhost:8080/api/products/etag/2
+Accept: application/json
+If-None-Match: "-1761251630"
+

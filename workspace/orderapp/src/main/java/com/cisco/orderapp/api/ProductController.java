@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -81,5 +82,11 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable("id") int id) {
         return "Operation Not supported!!!";
+    }
+
+    @GetMapping("/etag/{pid}")
+    public ResponseEntity<Product> getProductByIdAndEtag(@PathVariable("pid") int id) throws EntityNotFoundException {
+        Product p = orderService.getProductById(id);
+        return  ResponseEntity.ok().eTag(Long.toString(p.hashCode())).body(p);
     }
 }

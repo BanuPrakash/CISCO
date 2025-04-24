@@ -1067,3 +1067,61 @@ Spring Boot provides:
 
 
 MockMvc is used to make API calls for testing -- GET / POST / ...
+
+https://medium.com/@truongbui95/jacoco-code-coverage-with-spring-boot-835af8debc68
+
+======================
+
+Caching:
+* client side caching
+ --> Cache-Control header
+ --> ETag
+ An ETag (Entity Tag) is a unique identifier assigned by a web server to a specific version of a resource.
+ Etag is generally generated as hashCode() or we can use @Version of JPA
+    @Version
+    private int ver;
+    initially ver column will be 0;
+    every update triggers an increment in ver column 
+
+    @Version can also be used in avoiding data corruption in multi-user/multi-threaded enviroment
+
+Without Version:
+```
+    id  name    price   qty
+    12   A      1004    100
+
+    User 1:
+        get product 12
+        buys 3
+        qty = 97
+    User 2:
+         get product 12
+         buys 1
+         qty = 99
+    Based on last commit data will be 97 or 99 [ corrupted ]
+```
+
+
+With Version:
+```
+    id  name    price   qty   version
+    12   A      1004    100     0
+
+    User 1:
+        get product 12
+        buys 3
+        qty = 97
+
+        update products set qty = 97, version = version  + 1 where id = 12 and version = 0
+
+    User 2:
+         get product 12
+         buys 1
+         qty = 99
+        update products set qty = 99, version = version  + 1 where id = 12 and version = 0
+
+    First Commit wins; Other users --> StaleStateException
+
+```
+server side caching:
+

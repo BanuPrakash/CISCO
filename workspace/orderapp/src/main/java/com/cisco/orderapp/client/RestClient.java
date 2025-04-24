@@ -16,7 +16,7 @@ public class RestClient implements CommandLineRunner {
     public void run(String... args) throws Exception {
         getProductsFromApi();
         getProductById();
-        addProductUsingRestTemplate();
+     //   addProductUsingRestTemplate();
     }
 
     private void addProductUsingRestTemplate() {
