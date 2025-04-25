@@ -23,7 +23,7 @@ public class JwtService {
     @Value("${jwt.secret}")
     private String jwtSigningKey;
 
-    private String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails) {
 //        Map<String, Object> claims = new HashMap<>();
         Collection<String> authorities = userDetails.getAuthorities()
                 .stream()

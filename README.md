@@ -1336,8 +1336,8 @@ entity: User and Role
 repo: UserDao
 service: UserDetailsServiceImpl, JwtService [validate and generate tokens]
 
+DTOs: SignUpRequest,  SignInRequest
 
 
-
-
+Client --> RestController [ UserController] --> AuthenricationService --> register / login
 
