@@ -1286,6 +1286,8 @@ Using generated security password: 57edc9a5-3f96-461c-9a43-52290bc4e9ea
 * creates login and logout pages
 http://localhost:8080/logout
 
+https://bcrypt-generator.com/
+
 ==========
 
 
