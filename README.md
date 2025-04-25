@@ -1251,4 +1251,48 @@ t1.setPriority(8);
 
 Declarative Definition: With @HttpExchange, you define your HTTP client as an interface, annotating methods with HTTP methods and paths.
 
+=================================
+
+Day 4 Recap:
+```
+Caching: @EnableCache @Cacheable, @CachPut, @CacheEvict. CacheManager --> ConcurrentMapCache, Redis as Cache Manager.
+
+Level 3 RESTful WS --> HATEOAS --> WebMvcLinkBuilder
+Spring Data REST Module which works on any Data Repositories like JpaRepository, MonogRepository ...
+creates endpoints based on methods of repository interface. No need for explicilty writing RestController. @BasePathAwareController
+
+Async operations in Spring Boot Container.
+@EnableAsync --> Spring container by default provides a thread pool. We can expliclty create thread pools using Executors, ExecutorService ...
+@Async on top the method is used to specify that the method has to execute using the mentioned Thread pool
+
+@Async("flights-pool")
+public CompletableFuture<List<Flight>> getFlights() {...}
+
+RestTemplate, @HttpExchange, @GetExchange, @PostExchange, RestClient [Spring boot 3.0]
+
+```
+
+Spring Security provides APIs for Authentication and Authorization.
+
+```
+ <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+ </dependency>
+```
+* By including above dependency all resources will be protected.
+* creates one user with username="user" and generated password
+Using generated security password: 57edc9a5-3f96-461c-9a43-52290bc4e9ea
+* creates login and logout pages
+http://localhost:8080/logout
+
+
+
+
+
+
+
+
+
+
 
