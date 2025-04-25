@@ -23,17 +23,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
+//@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request.requestMatchers("/auth/**").permitAll()
 
-                      //  .requestMatchers("/api/orders/**").permitAll()
+                        //  .requestMatchers("/api/orders/**").permitAll()
 //                        .requestMatchers("/api/orders").hasAnyRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -42,6 +43,7 @@ public class SecurityConfig {
         return httpSecurity.build();
         // no form based login
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

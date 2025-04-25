@@ -1412,3 +1412,14 @@ public class AuthController {
     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
 3) SecurityConfig configured to use JwtAuthenticationFilter
+
+===
+Accessing protected Resource:
+```
+GET http://localhost:8080/api/products
+Accept: application/json
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRlckBhZG9iZS5jb20iLCJpYXQiOjE3NDU1Njg5NTUsImV4cCI6MTc0NTY1NTM1NSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlzcyI6Imh0dHBzOi8vYXV0aC5jaXNjby5jb20ifQ.cPL39ELD_enKXGIqvXcO1TeB2GsPbQQUMgqthPQSMHU
+
+```
+

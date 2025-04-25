@@ -21,7 +21,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "anna@adobe.com",
+  "email": "kim@cisco.com",
   "password": "secret",
   "username": "Anna",
   "roles": [ {
@@ -42,7 +42,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "roger@cisco.com",
+  "email": "kim@cisco.com",
   "password": "secret"
 }
 
@@ -51,4 +51,4 @@ Accept: application/json
 
 GET http://localhost:8080/api/products
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRlckBhZG9iZS5jb20iLCJpYXQiOjE3NDU1Njg5NTUsImV4cCI6MTc0NTY1NTM1NSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlzcyI6Imh0dHBzOi8vYXV0aC5jaXNjby5jb20ifQ.cPL39ELD_enKXGIqvXcO1TeB2GsPbQQUMgqthPQSMHU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraW1AY2lzY28uY29tIiwiaWF0IjoxNzQ1NTcyMzY5LCJleHAiOjE3NDU2NTg3NjksInJvbGVzIjpbIlJPTEVfVVNFUiIsIlJPTEVfQURNSU4iXSwiaXNzIjoiaHR0cHM6Ly9hdXRoLmNpc2NvLmNvbSJ9.wnSWm0fVujcmShJNUUWfNCTdQrO9xVV0xruLdXl0_1A
