@@ -1290,16 +1290,56 @@ https://bcrypt-generator.com/
 
 ==========
 
+RESTful WS --> Stateless
+How is the server going to identity the client. CLient needs to pass his/her information everytime they make a request
+Client request will have -> principle, authorites --> secured Token
 
-OrderApp --> Secure
+JWT : JSON Web Token 
 
-Resume @ 11:10
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
 
+Headers:
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
 
+Payload:
+{
+  "sub": "roger@cisco.com",
+  "iat": 1516239022,
+  "exp": 1600023032,
+  "iss": "https://auth.cisco.com",
+  "authorities": "ADMIN", "MANAGER", ...
+}
 
+Signature:
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+    "topsecretsaltvalueforsecurity-abracadabra"
+  )
 
+Signature we can use secret key.
+We can also use Private Keys and Public Keys
+private key --> used by AuthServer --> to generate token
+public keys --> used by ResourceServer --> to validate the token
 
+```
 
+JPA for Authentication and authorization
+
+User <--- Many To Many --> Role
+
+Users
+ a@cisco.com
+
+roles
+    role_admin
+
+users_roles
+USER_ID  ROLE_ID
 
 
 
