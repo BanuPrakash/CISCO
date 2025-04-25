@@ -1332,14 +1332,9 @@ JPA for Authentication and authorization
 
 User <--- Many To Many --> Role
 
-Users
- a@cisco.com
-
-roles
-    role_admin
-
-users_roles
-USER_ID  ROLE_ID
+entity: User and Role
+repo: UserDao
+service: UserDetailsServiceImpl
 
 
 
