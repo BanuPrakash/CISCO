@@ -1334,7 +1334,9 @@ User <--- Many To Many --> Role
 
 entity: User and Role
 repo: UserDao
-service: UserDetailsServiceImpl
+service: UserDetailsServiceImpl, JwtService [validate and generate tokens]
+
+
 
 
 
