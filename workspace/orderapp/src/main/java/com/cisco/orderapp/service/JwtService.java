@@ -1,6 +1,7 @@
 package com.cisco.orderapp.service;
 
 import com.cisco.orderapp.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -16,6 +17,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,5 +49,48 @@ public class JwtService {
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64URL.decode(jwtSigningKey);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+
+    private Claims extractAllClaims(String token) {
+        Claims claims;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(jwtSigningKey)
+                    .parseClaimsJws(token)
+                    .getBody();
+            System.out.println("Claims " + claims );
+        } catch (Exception e) {
+            e.printStackTrace();
+            claims = null;
+        }
+        return claims;
+    }
+
+    private <T>  T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    public String extractUserName(String token) {
+        String sub =  extractClaim(token, Claims::getSubject);
+        System.out.println("Subject " + sub);
+        return sub;
+    }
+
+    public Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    // next time when client passes token, need to validate it
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        String userName = extractUserName(token);
+        System.out.println("Extracted userNAme " + userName);
+        User user = (User) userDetails;
+        return (userName.equals(user.getEmail()) && !isTokenExpired(token));
     }
 }

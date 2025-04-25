@@ -1338,6 +1338,77 @@ service: UserDetailsServiceImpl, JwtService [validate and generate tokens]
 
 DTOs: SignUpRequest,  SignInRequest
 
+====
 
-Client --> RestController [ UserController] --> AuthenricationService --> register / login
+Steps of registration:
 
+1) 
+```
+
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "anna@adobe.com",
+  "password": "secret",
+  "username": "Anna",
+  "roles": [ {
+    "name": "ROLE_USER",
+    "description": "Has basic rights"
+  },
+    {
+      "name": "ROLE_ADMIN",
+      "description": "Admin rights"
+    }]
+}
+
+@RequestMapping("/auth")
+public class AuthController {
+ private  final AuthenticationService service;
+
+    @PostMapping("/register")
+    public String register(@RequestBody SignUpRequest request) {
+        System.out.println("Entered!!!");
+        return  service.signUp(request);
+    }
+}
+```
+
+2) AuthenticationService:
+```
+ // register
+    public  String signUp(SignUpRequest request) {
+          userDao.save(user);
+```
+
+3) ```
+public class JwtService {
+     public String generateToken(UserDetails userDetails) {
+
+```
+
+Login:
+
+```
+
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "anna@adobe.com",
+  "password": "secret"
+}
+
+```
+
+1) @RequestMapping("/auth")
+@RequiredArgsConstructor
+public class AuthController {
+    @PostMapping("/login")
+
+2) AuthenticationService
+    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
+3) SecurityConfig configured to use JwtAuthenticationFilter

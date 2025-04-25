@@ -5,6 +5,8 @@ import com.cisco.orderapp.dto.SignUpRequest;
 import com.cisco.orderapp.entity.User;
 import com.cisco.orderapp.repo.UserDao;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ public class AuthenticationService {
     private final UserDao userDao;
     private final JwtService jwtService;
     private  final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     // register
     public  String signUp(SignUpRequest request) {
@@ -30,10 +33,12 @@ public class AuthenticationService {
 
     // login
     public  String login(SignInRequest request) {
-        // TODO use AuthenticationManager to validate, validate token..
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
         User user = userDao.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email/pwd"));
         String token = jwtService.generateToken(user);
+        System.out.println(token);
         return token;
     }
 }

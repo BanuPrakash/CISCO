@@ -17,8 +17,8 @@ public class RestTemplateClient implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        getProductsFromApi();
-        getProductById();
+//        getProductsFromApi();
+//        getProductById();
         //   addProductUsingRestTemplate();
     }
 

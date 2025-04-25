@@ -1,0 +1,54 @@
+### @name ="Register User"
+
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "roger@cisco.com",
+  "password": "secret",
+  "username": "Roger",
+  "roles": [ {
+    "name": "ROLE_USER",
+    "description": "Has basic rights"
+  }]
+}
+
+### @name ="Register Admin"
+
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "anna@adobe.com",
+  "password": "secret",
+  "username": "Anna",
+  "roles": [ {
+    "name": "ROLE_USER",
+    "description": "Has basic rights"
+  },
+    {
+      "name": "ROLE_ADMIN",
+      "description": "Admin rights"
+    }]
+}
+
+
+### @name ="Admin Login"
+
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "roger@cisco.com",
+  "password": "secret"
+}
+
+
+### @name="access Protected Resource"
+
+GET http://localhost:8080/api/products
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRlckBhZG9iZS5jb20iLCJpYXQiOjE3NDU1Njg5NTUsImV4cCI6MTc0NTY1NTM1NSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlzcyI6Imh0dHBzOi8vYXV0aC5jaXNjby5jb20ifQ.cPL39ELD_enKXGIqvXcO1TeB2GsPbQQUMgqthPQSMHU
